@@ -22,6 +22,7 @@ export default function Slider() {
       <div className={s.parentCarousel}>
         <div className={s.slid}>
           <Carousel
+            className={s.container}
             isAutoPlaying={true}
             autoPlayInterval={3000}
             images={images}
