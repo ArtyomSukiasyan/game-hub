@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import img from "../../img/logo.jpg";
-import styles from "./OneGames.module.css";
+import styles from "./GameList.module.css";
 
-export default function OneGame() {
+export default function GameList() {
   const [game, setGame] = useState(null);
 
   const data = [

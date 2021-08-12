@@ -1,13 +1,11 @@
-import React from 'react'
-import OneGame from '../oneGame/OneGame'
-import styles from './Games.module.css'
+import React from "react";
+import GameList from "../GameList/GameList";
+import styles from "./Games.module.css";
 
 export default function Games() {
-
-    return (
-        <div className={styles.games}>
-            <OneGame />
-            
-        </div>
-    )
+  return (
+    <div className={styles.games}>
+      <GameList />
+    </div>
+  );
 }
