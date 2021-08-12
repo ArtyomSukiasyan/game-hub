@@ -1,8 +1,8 @@
 import React from "react";
 import Carousel from "react-gallery-carousel";
 import "react-gallery-carousel/dist/index.css";
-import s from "./Slider.module.css";
 import img1 from "../../img/g1.png";
+import styles from "./Slider.module.css";
 // import img2 from "../../img/spin.png";
 // import img3 from "../../img/animationSpin.gif";
 // import img4 from "../../img/logo1.png";
@@ -19,10 +19,10 @@ const images = [
 export default function Slider() {
   return (
     <>
-      <div className={s.parentCarousel}>
-        <div className={s.slid}>
+      <div className={styles.parentCarousel}>
+        <div className={styles.slid}>
           <Carousel
-            className={s.container}
+            className={styles.container}
             isAutoPlaying={true}
             autoPlayInterval={3000}
             images={images}

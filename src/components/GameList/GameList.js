@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import img from "../../img/logo.jpg";
-import s from "./OneGames.module.css";
+import styles from "./GameList.module.css";
 
-export default function OneGame() {
+export default function GameList() {
   const [game, setGame] = useState(null);
 
   const data = [
@@ -22,11 +22,11 @@ export default function OneGame() {
     <>
       {game &&
         game.map((d) => (
-          <div key={d.id} className={s.forOneGame}>
-            <div className={s.forImg}>
+          <div key={d.id} className={styles.forOneGame}>
+            <div className={styles.forImg}>
               <img alt="gameName" src={d.url} />
             </div>
-            <div className={s.textPart}>
+            <div className={styles.textPart}>
               <h2>{d.title}</h2>
               <p>{d.description}</p>
             </div>
