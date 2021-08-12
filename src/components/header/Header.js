@@ -1,38 +1,37 @@
-import { IconButton } from "@material-ui/core";
-import React from "react";
-import { NavLink } from "react-router-dom";
-import Language from "../language/Language";
 import PersonIcon from "@material-ui/icons/Person";
-import s from "./Header.module.css";
+import { IconButton } from "@material-ui/core";
+import { NavLink } from "react-router-dom";
 import logo from "../../img/lg.png";
+import Language from "../language/Language";
+import styles from "./Header.module.css";
 
 export default function Header() {
   return (
-    <header className={s.header}>
+    <header className={styles.header}>
       <div>
         <img alt="logo" src={logo} width="40px" />
       </div>
-      <nav className={s.navigation}>
+      <nav className={styles.navigation}>
         <b>
-          <NavLink exact to="/" activeClassName={s.selected}>
+          <NavLink exact to="/" activeClassName={styles.selected}>
             Home
           </NavLink>
         </b>
         <b>
-          <NavLink to="/games" activeClassName={s.selected}>
+          <NavLink to="/games" activeClassName={styles.selected}>
             Games
           </NavLink>
         </b>
         <b>
-          <NavLink to="/about" activeClassName={s.selected}>
+          <NavLink to="/about" activeClassName={styles.selected}>
             About
           </NavLink>
         </b>
       </nav>
-      <div className={s.icons}>
+      <div className={styles.icons}>
         <Language />
         <IconButton>
-          <PersonIcon className={s.icon} />
+          <PersonIcon className={styles.icon} />
           <NavLink to="/register">Log In</NavLink>
         </IconButton>
       </div>
