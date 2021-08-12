@@ -6,6 +6,13 @@ import Language from "../language/Language";
 import styles from "./Header.module.css";
 
 export default function Header() {
+  const paths = {
+    home: "/",
+    games: "/games",
+    about: "/about",
+    register: "/register",
+  };
+
   return (
     <header className={styles.header}>
       <div>
@@ -13,17 +20,17 @@ export default function Header() {
       </div>
       <nav className={styles.navigation}>
         <b>
-          <NavLink exact to="/" activeClassName={styles.selected}>
+          <NavLink exact to={paths.home} activeClassName={styles.selected}>
             Home
           </NavLink>
         </b>
         <b>
-          <NavLink to="/games" activeClassName={styles.selected}>
+          <NavLink to={paths.games} activeClassName={styles.selected}>
             Games
           </NavLink>
         </b>
         <b>
-          <NavLink to="/about" activeClassName={styles.selected}>
+          <NavLink to={paths.about} activeClassName={styles.selected}>
             About
           </NavLink>
         </b>
@@ -32,7 +39,7 @@ export default function Header() {
         <Language />
         <IconButton>
           <PersonIcon className={styles.icon} />
-          <NavLink to="/register">Log In</NavLink>
+          <NavLink to={paths.register}>Log In</NavLink>
         </IconButton>
       </div>
     </header>

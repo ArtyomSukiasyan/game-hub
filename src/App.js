@@ -4,15 +4,20 @@ import AllGames from "./pages/allGames/AllGames";
 import About from "./pages/about/About";
 import Register from "./pages/register/Register";
 
-
 function App() {
+  const paths = {
+    home: "/",
+    games: "/games",
+    about: "/about",
+    register: "/register",
+  };
   return (
     <>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/games" component={AllGames} />
-        <Route path="/about" component={About} />
-        <Route path="/register" component={Register} />
+        <Route exact path={paths.home} component={Home} />
+        <Route path={paths.games} component={AllGames} />
+        <Route path={paths.about} component={About} />
+        <Route path={paths.register} component={Register} />
       </Switch>
     </>
   );
