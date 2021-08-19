@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Bid from "./bid/Bid";
-import s from "./Game.module.css";
 import NumbersBord from "./numbersBord/NumbersBord";
 import Ranges from "./ranges/Ranges";
 import Spin from "./spin/Spin";
+import goldChip from './imgs/goldChip.png'
+import styles from "./Game.module.css";
 
-
-export default function Game() {
+export default function Roulette() {
   const [money, setMoney] = useState(500);
   const [state, setState] = useState([]);
   const [colorWin, setColorWin] = useState([]);
@@ -68,19 +68,20 @@ export default function Game() {
   };
 
   const makeABid = (bid) => {
-    setMoney(money - bid);
-    setBlind(blind + bid);
+    if (money > 0) {
+      setMoney(money - bid);
+      setBlind(blind + bid);
+    }
   };
 
   return (
-    <div className={s.gameBord}>
+    <div className={styles.gameBord}>
       <div>
         <div>Bank:{money}</div>
         <Spin getranfom={getranfom} />
-        {/* <Winner /> */}
         <div>
-          <NumbersBord isClicked={isClicked} checkColor={checkColor} />
-          <Ranges checkRanges={checkRanges} />
+          <NumbersBord goldChip={goldChip} isClicked={isClicked} checkColor={checkColor} />
+          <Ranges goldChip={goldChip} checkRanges={checkRanges} />
         </div>
         <Bid blind={blind} makeABid={makeABid} />
       </div>
