@@ -14,15 +14,12 @@ const Auth = () => {
   const { loading, request, error, clearError } = useHttp();
 
   const logIn = async (email, password, userName) => {
-    console.log(email, password);
     try {
       const data = await request(
         "https://shavarshgame.herokuapp.com/api/login/",
         "POST",
         { email: email, password: password }
       );
-
-      console.log(data);
 
       if (userName) {
         const newData = await request(
@@ -33,21 +30,19 @@ const Auth = () => {
             Authorization: `Bearer ${data.token}`,
           }
         );
-        console.log(newData);
       }
 
       localStorage.setItem("auth", JSON.stringify(data));
     } catch (e) {}
   };
   const signUp = async (userName, email, password) => {
-    console.log("maladec");
     try {
       const data = await request(
         "https://shavarshgame.herokuapp.com/api/register/",
         "POST",
         { email: email, userName: userName, password: password }
       );
-      console.log(data.message);
+
       logIn(email, password, userName);
     } catch (e) {}
   };
@@ -60,7 +55,6 @@ const Auth = () => {
       if (passwordTest.test(password) && emailTest.test(email)) {
         logIn(email, password);
       } else {
-        console.log("krkin pordir");
       }
     } else {
       if (
