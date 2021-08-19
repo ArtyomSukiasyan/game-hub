@@ -1,0 +1,221 @@
+.table_2048 {
+  width: 416px;
+  height: 416px;
+}
+
+.gamBam {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+  min-height: 100%;
+  display: flex;
+}
+.gamBamBord {
+  width: 416px;
+  height: 416px;
+  padding: 0.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  --tw-bg-opacity: 1;
+  background-color: rgba(75, 85, 99, var(--tw-bg-opacity));
+  justify-content: space-around;
+  align-items: center;
+}
+.namberBlok {
+  padding: 0.25rem;
+
+  --tw-bg-opacity: 1;
+  background-color: rgba(0, 0, 0, var(--tw-bg-opacity));
+
+  width: 6rem;
+  height: 6rem;
+}
+.blokchilth {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: cornsilk;
+  color: black;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  width: 100;
+  height: 100%;
+}
+.blokchilth22 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(206, 247, 212);
+  color: black;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  width: 100;
+  height: 100%;
+}
+.blokchilth2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(240, 211, 98);
+  color: black;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  width: 100;
+  height: 100%;
+}
+
+.blokchilth4 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(177, 151, 47);
+  color: black;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  width: 100;
+  height: 100%;
+}
+
+.blokchilth8 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(219, 203, 137);
+  color: black;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  width: 100;
+  height: 100%;
+}
+
+.blokchilth16 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(216, 96, 60);
+  color: black;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  width: 100;
+  height: 100%;
+}
+
+.blokchilth32 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(241, 65, 11);
+  color: black;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  width: 100;
+  height: 100%;
+}
+.blokchilth64 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(233, 155, 131);
+  color: black;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  width: 100;
+  height: 100%;
+}
+.blokchilth128 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(145, 96, 82);
+  color: black;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  width: 100;
+  height: 100%;
+}
+.blokchilth256 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(110, 180, 125);
+  color: black;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  width: 100;
+  height: 100%;
+}
+.blokchilth512 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(207, 144, 176);
+  color: black;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  width: 100;
+  height: 100%;
+}
+.blokchilth1024 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(235, 144, 179);
+  color: black;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  width: 100;
+  height: 100%;
+}
+
+.blokchilth2048 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(109, 171, 207);
+  color: black;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  width: 100;
+  height: 100%;
+}
+.blokchilth4096 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(192, 135, 157);
+  color: black;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  width: 100;
+  height: 100%;
+}
+
+.blokchilth8192 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(103, 123, 161);
+  color: black;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  width: 100;
+  height: 100%;
+}
