@@ -8,8 +8,8 @@ export default function AllGames() {
   return (
     <div>
       <Header />
-      {/* <Roulette /> */}
-      <Turtles />
+      <Roulette />
+      {/* <Turtles /> */}
     </div>
   );
 }

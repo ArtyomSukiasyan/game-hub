@@ -19,7 +19,7 @@ function Bid({ makeABid, blind }) {
           <img alt="chip" src={chip2} width="20px" />
         </div>
       </div>
-      <div>{blind}</div>
+      <div><span>Bid:</span>{blind}</div>
     </div>
   );
 }

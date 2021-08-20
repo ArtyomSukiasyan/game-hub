@@ -60,7 +60,7 @@ export default function Roulette() {
   const checkRanges = (arr) => {
     console.log(arr);
     setState(arr);
-    setDoesSelected(!doesSelected)
+    setDoesSelected(!doesSelected);
   };
 
   const isClicked = (nm) => {
@@ -86,7 +86,11 @@ export default function Roulette() {
             isClicked={isClicked}
             checkColor={checkColor}
           />
-          <Ranges doesSelected={doesSelected} checkRanges={checkRanges} />
+          <Ranges
+            doesSelected={doesSelected}
+            checkRanges={checkRanges}
+            style={state}
+          />
         </div>
         <Bid blind={blind} makeABid={makeABid} />
       </div>
