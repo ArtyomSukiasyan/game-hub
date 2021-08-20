@@ -2,20 +2,33 @@ import React from "react";
 import { func } from "prop-types";
 import styles from "./Ranges.module.css";
 
-function Ranges({ checkRanges }) {
+function Ranges({ checkRanges, doesSelected }) {
   const range1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const range2 = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
   const range3 = [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36];
 
+  const clickedStyles = {
+    backgroundColor: "gold",
+  };
+
   return (
     <div className={styles.ranges}>
-      <div onClick={() => checkRanges(range1)}>
+      <div
+        onClick={() => checkRanges(range1)}
+        style={doesSelected ? clickedStyles : null}
+      >
         <span>1-12</span>
       </div>
-      <div onClick={() => checkRanges(range2)}>
+      <div
+        onClick={() => checkRanges(range2)}
+        style={doesSelected ? clickedStyles : null}
+      >
         <span>13-24</span>
       </div>
-      <div onClick={() => checkRanges(range3)}>
+      <div
+        onClick={() => checkRanges(range3)}
+        style={doesSelected ? clickedStyles : null}
+      >
         <span>25-36</span>
       </div>
     </div>

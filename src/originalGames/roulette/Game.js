@@ -3,7 +3,6 @@ import Bid from "./bid/Bid";
 import NumbersBord from "./numbersBord/NumbersBord";
 import Ranges from "./ranges/Ranges";
 import Spin from "./spin/Spin";
-import goldChip from './imgs/goldChip.png'
 import styles from "./Game.module.css";
 
 export default function Roulette() {
@@ -12,6 +11,7 @@ export default function Roulette() {
   const [colorWin, setColorWin] = useState([]);
   const [winNum, setWinNum] = useState(0);
   const [blind, setBlind] = useState(0);
+  const [doesSelected, setDoesSelected] = useState(false);
 
   const getranfom = () => {
     const r = Math.floor(Math.random() * 37);
@@ -60,6 +60,7 @@ export default function Roulette() {
   const checkRanges = (arr) => {
     console.log(arr);
     setState(arr);
+    setDoesSelected(!doesSelected)
   };
 
   const isClicked = (nm) => {
@@ -80,8 +81,12 @@ export default function Roulette() {
         <div>Bank:{money}</div>
         <Spin getranfom={getranfom} />
         <div>
-          <NumbersBord goldChip={goldChip} isClicked={isClicked} checkColor={checkColor} />
-          <Ranges goldChip={goldChip} checkRanges={checkRanges} />
+          <NumbersBord
+            doesSelected={doesSelected}
+            isClicked={isClicked}
+            checkColor={checkColor}
+          />
+          <Ranges doesSelected={doesSelected} checkRanges={checkRanges} />
         </div>
         <Bid blind={blind} makeABid={makeABid} />
       </div>
