@@ -1,20 +1,16 @@
 import React, { useState } from "react";
 import Board from "../Board/Board";
 import ShowMessages from "../Messages/Messages";
+import { loadState, saveState } from "../../Helpers/localStorage";
 import styles from "./TacToe.module.css";
 
+const X = "X";
+const Y = "Y";
+
 export default function TacToe() {
-  const [squares, setSquares] = useState(
-    localStorage.getItem("game")
-      ? JSON.parse(localStorage.getItem("game"))
-      : Array(9).fill(null)
-  );
+  const [squares, setSquares] = useState(loadState("game") ? loadState("game"): Array(9).fill(null));
   const [count, setCount] = useState(0);
-  const [result, setResult] = useState(
-    localStorage.getItem("winner")
-      ? JSON.parse(localStorage.getItem("winner"))
-      : ""
-  );
+  const [result, setResult] = useState(loadState("winner") ? loadState("winner"): "");
   const [errorMessage, setErrorMessage] = useState("");
   const [localStorageMessage, setLocalStorageMessage] = useState("");
 
@@ -30,7 +26,7 @@ export default function TacToe() {
   ];
 
   const isWinner = () => {
-    const s = count % 2 === 0 ? "X" : "O";
+    const s = count % 2 === 0 ? X : Y;
 
     for (let i = 0; i < winnerLine.length; i++) {
       const line = winnerLine[i];
@@ -40,7 +36,7 @@ export default function TacToe() {
         squares[line[2]] === s
       ) {
         setResult(`${s} win`);
-        localStorage.setItem("winner", JSON.stringify(`${s} win`));
+        saveState("winner ", `${s} win`);
         return;
       }
     }
@@ -48,7 +44,8 @@ export default function TacToe() {
     if (count === 8) {
       setResult("Draw");
       try {
-        localStorage.setItem("winner", JSON.stringify("Draw"));
+        saveState("winner", "Draw");
+
       } catch {
         setLocalStorageMessage("Impossible to save in your local storage");
       }
@@ -59,7 +56,7 @@ export default function TacToe() {
     if (result === "") {
       const data = e.target.getAttribute("data");
       if (squares[data] === null) {
-        squares[data] = count % 2 === 0 ? "X" : "O";
+        squares[data] = count % 2 === 0 ? X : Y;
         setSquares(squares);
         setCount(count + 1);
       } else {
@@ -69,7 +66,7 @@ export default function TacToe() {
         }, 1000);
       }
       try {
-        localStorage.setItem("game", JSON.stringify(squares));
+        saveState("game", squares);
       } catch {
         setLocalStorageMessage("Impossible to save in your local storage");
       }
@@ -82,8 +79,8 @@ export default function TacToe() {
     setCount(0);
     setResult("");
     try {
-      localStorage.removeItem("game");
-      localStorage.removeItem("winner");
+      saveState("game", squares);
+      saveState("winner", "");
     } catch {
       setLocalStorageMessage("Impossible to save in your local storage");
     }

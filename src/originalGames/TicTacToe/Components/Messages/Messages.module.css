@@ -1,21 +1,20 @@
-.messages{
+.messages {
   text-align: center;
   width: 50%;
   height: 450px;
   padding-top: 200px;
 }
 
-.result{
+.result {
   font-size: 50px;
 }
 
-.error{
+.error {
   font-size: 40px;
 }
 
-.button{
-
-  background-color: purple; 
+.button {
+  background-color: purple;
   border: none;
   color: white;
   padding: 15px 32px;
