@@ -8,9 +8,13 @@ const X = "X";
 const Y = "Y";
 
 export default function TacToe() {
-  const [squares, setSquares] = useState(loadState("game") ? loadState("game"): Array(9).fill(null));
+  const [squares, setSquares] = useState(
+    loadState("game") ? loadState("game") : Array(9).fill(null)
+  );
   const [count, setCount] = useState(0);
-  const [result, setResult] = useState(loadState("winner") ? loadState("winner"): "");
+  const [result, setResult] = useState(
+    loadState("winner") ? loadState("winner") : ""
+  );
   const [errorMessage, setErrorMessage] = useState("");
   const [localStorageMessage, setLocalStorageMessage] = useState("");
 
@@ -45,7 +49,6 @@ export default function TacToe() {
       setResult("Draw");
       try {
         saveState("winner", "Draw");
-
       } catch {
         setLocalStorageMessage("Impossible to save in your local storage");
       }
