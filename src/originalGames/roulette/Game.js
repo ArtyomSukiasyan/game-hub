@@ -11,7 +11,6 @@ export default function Roulette() {
   const [colorWin, setColorWin] = useState([]);
   const [winNum, setWinNum] = useState(0);
   const [blind, setBlind] = useState(0);
-  const [doesSelected, setDoesSelected] = useState(false);
 
   const getranfom = () => {
     const r = Math.floor(Math.random() * 37);
@@ -60,7 +59,6 @@ export default function Roulette() {
   const checkRanges = (arr) => {
     console.log(arr);
     setState(arr);
-    setDoesSelected(!doesSelected);
   };
 
   const isClicked = (nm) => {
@@ -82,12 +80,10 @@ export default function Roulette() {
         <Spin getranfom={getranfom} />
         <div>
           <NumbersBord
-            doesSelected={doesSelected}
             isClicked={isClicked}
             checkColor={checkColor}
           />
           <Ranges
-            doesSelected={doesSelected}
             checkRanges={checkRanges}
             style={state}
           />
