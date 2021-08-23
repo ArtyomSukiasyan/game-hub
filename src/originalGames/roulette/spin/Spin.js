@@ -10,6 +10,7 @@ export default function Spin({ getranfom }) {
 
   const myStyles = { transform: "rotate(1800deg)", transition: "3s" };
 
+
   useEffect(() => {
     setOneRange(JSON.parse(localStorage.getItem("range")));
   }, []);

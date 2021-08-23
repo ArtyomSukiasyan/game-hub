@@ -21,6 +21,7 @@ function Ranges({ checkRanges }) {
         }}
         style={dev[0] ? clickedStyles : null}
       >
+
         <span>1-12</span>
       </div>
       <div

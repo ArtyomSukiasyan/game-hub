@@ -3,6 +3,7 @@ import { func } from "prop-types";
 import ColorBords from "./colorBords/ColorBords";
 import EvenNum from "./evenNum/EvenNum";
 import OddNum from "./oddNum/OddNum";
+
 import styles from "./NumbersBord.module.css";
 
 const odd = {
