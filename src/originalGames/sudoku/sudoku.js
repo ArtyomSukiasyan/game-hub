@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useHttp } from "../../helpers/hooks/useHttp";
+import { useHttp } from "../../hooks/useHttp";
 import CreateBlok from "./gameBlok";
 
 import { deleteNumbers } from "./getNumbers";

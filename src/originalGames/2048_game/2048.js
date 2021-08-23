@@ -6,13 +6,17 @@ import startEvent from "./startEvent";
 import isSimilar from "./isSimilar";
 import styles from "./style.module.css";
 
-const GamBam = () => {
-  const [gametablevalue, setgametablevalue] = useState([]);
-  const [table, setTable] = useState(<div></div>);
+const start = "start";
+const gameSize = 4;
 
-  const move = useCallback((newMtr) => {
-    if (gametablevalue.length != 0) {
-      let value = newMtr;
+const Game2048 = () => {
+  const [gametablevalue, setgametablevalue] = useState([]);
+  const [table, setTable] = useState(null);
+  const [points, setPoints] = useState(0);
+
+  const move = useCallback((newМatrix) => {
+    if (gametablevalue.length !== 0) {
+      let value = newМatrix;
       if (isSimilar(value, gametablevalue)) {
         value = pour(value);
       }
@@ -20,12 +24,22 @@ const GamBam = () => {
       setTable(check(value));
     }
   });
+  useEffect(() => {
+    const game_points = gametablevalue.reduce((acc, item) => {
+      acc += item.reduce((acc2, item2) => {
+        acc2 += item2;
+        return acc2;
+      });
+      return acc;
+    }, 0);
+    setPoints(game_points);
+  }, [gametablevalue]);
 
   useEffect(() => {
     let value = [];
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < gameSize; i++) {
       value[i] = [];
-      for (let j = 0; j < 4; j++) {
+      for (let j = 0; j < gameSize; j++) {
         value[i] = [...value[i], false];
       }
     }
@@ -37,13 +51,22 @@ const GamBam = () => {
   }, []);
 
   useEffect(() => {
-    startEvent("start", move, gametablevalue);
+    startEvent(start, move, gametablevalue);
   }, [table]);
 
   return (
-    <div className={styles.gamBam}>
-      <div className={styles.gamBamBord}>{table}</div>
-    </div>
+    <>
+      <div className={styles.number_thing}>
+        <div className={styles.screen}>
+          <div className={styles.numbers}>{points}</div>
+          <div className={styles.shine}></div>
+          <div className={styles.bloom}></div>
+        </div>
+      </div>
+      <div className={styles.gamBam}>
+        <div className={styles.gamBamBord}>{table}</div>
+      </div>
+    </>
   );
 };
-export default GamBam;
+export default Game2048;
