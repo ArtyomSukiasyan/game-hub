@@ -23,8 +23,18 @@ export default function Turtles() {
     { id: 7, name: shreder },
     { id: 8, name: michelangelo },
   ];
+  const shuffleTurtles = [
+    { id: 6, name: splinter },
+    { id: 2, name: keysi },
+    { id: 8, name: michelangelo },
+    { id: 1, name: donatello },
+    { id: 7, name: shreder },
+    { id: 4, name: raphael },
+    { id: 3, name: leonardo },
+    { id: 5, name: onil },
+  ];
 
-  const pairOfTurtles = [...turtles, ...turtles];
+  const pairOfTurtles = [...turtles, ...shuffleTurtles];
 
   function flipCard(index) {
     setOpenedCard((opened) => [...opened, index]);

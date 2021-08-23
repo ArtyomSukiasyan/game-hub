@@ -1,5 +1,4 @@
 .bidPage {
-  background-color: grey;
   margin: 5px 0 5px 0;
   display: flex;
   justify-content: space-between;
@@ -7,6 +6,8 @@
 .chips {
   display: flex;
   justify-content: center;
+  background-color: rgb(73, 129, 35);
+  padding:5px 5px 0 5px;
 }
 .chips img {
   cursor: pointer;

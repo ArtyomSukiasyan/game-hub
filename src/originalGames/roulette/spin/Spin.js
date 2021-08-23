@@ -8,7 +8,8 @@ export default function Spin({ getranfom }) {
   const [oneColor, setOneColor] = useState([]);
   const [rand, setRand] = useState(Math.floor(Math.random() * 38));
 
-  const styleess = { transform: "rotate(1800deg)", transition: "3s" };
+  const myStyles = { transform: "rotate(1800deg)", transition: "3s" };
+
 
   useEffect(() => {
     setOneRange(JSON.parse(localStorage.getItem("range")));
@@ -35,7 +36,7 @@ export default function Spin({ getranfom }) {
   return (
     <div className={styles.spinPart}>
       <div className={styles.spin} onClick={() => theGame2()}>
-        <img alt="spin" src={spin} style={stile ? styleess : null} />
+        <img alt="spin" src={spin} style={stile ? myStyles : null} />
       </div>
       <div className={styles.result}>
         <b>{rand}</b>
