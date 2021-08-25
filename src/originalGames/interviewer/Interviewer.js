@@ -3,9 +3,9 @@ import Questions from "./components/questions/Questions";
 import Answers from "./components/answers/Answers";
 import AnswersQuestions from "./anssersQuestions/AnssersQuestions";
 import Bank from "./components/bank/Bank";
-import styles from "./Milioner.module.css";
+import styles from "./Interviewer.module.css";
 
-export default function Milioner() {
+export default function Interviewer() {
   const [questionNum, setQuestionNum] = useState(0);
   const [data, setData] = useState(AnswersQuestions[questionNum]);
   const [point, setPoint] = useState(0);
