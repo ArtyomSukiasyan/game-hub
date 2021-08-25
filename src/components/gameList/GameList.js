@@ -4,7 +4,7 @@ import img from "../../img/logo.jpg";
 import styles from "./GameList.module.css";
 
 export default function GameList() {
-  const [game, setGame] = useState(null);
+  const [games, setGames] = useState(null);
 
   const data = [
     {
@@ -59,13 +59,13 @@ export default function GameList() {
   ];
 
   useEffect(() => {
-    setGame(data);
+    setGames(data);
   }, []);
 
   return (
     <>
-      {game &&
-        game.map((d) => (
+      {games &&
+        games.map((d) => (
           <Link to={d.route} key={d.id} className={styles.forOneGame}>
             <div className={styles.forImg}>
               <img alt="gameName" src={d.url} />

@@ -1,12 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import Game2048 from "../../originalGames/2048_game/2048";
-import Interviewer from "../../originalGames/interviewer/Interviewer";
-import Minesweeper from "../../originalGames/minesweeper/minesweeper";
-import Roulette from "../../originalGames/roulette/Game";
-import Sudoku from "../../originalGames/sudoku/sudoku";
-import TacToe from "../../originalGames/TicTacToe/Components/TacToe/TacToe";
-import Turtles from "../../originalGames/turtlesMemory/Turtles";
+import Game2048 from "../../components/originalGames/2048_game/2048";
+import Interviewer from "../../components/originalGames/interviewer/Interviewer";
+import Minesweeper from "../../components/originalGames/minesweeper/minesweeper";
+import Roulette from "../../components/originalGames/roulette/Game";
+import Sudoku from "../../components/originalGames/sudoku/sudoku";
+import TacToe from "../../components/originalGames/TicTacToe/Components/TacToe/TacToe";
+import Turtles from "../../components/originalGames/turtlesMemory/Turtles";
 
 export default function GamePage() {
   const { type } = useParams();
