@@ -11,7 +11,7 @@ import styles from "./GameList.module.css";
 
 export default function GameList() {
   const [games, setGames] = useState(null);
-  
+
   const data = [
     {
       url: roulette,
