@@ -1,5 +1,5 @@
 import React from "react";
-import GameList from "../GameList/GameList";
+import GameList from "../gameList/GameList";
 import styles from "./Games.module.css";
 
 export default function Games() {
