@@ -5,15 +5,9 @@ import About from "./pages/about/About";
 import Register from "./pages/register/Register";
 import GamePage from "./pages/gamePage/GamePage";
 import Header from "./components/header/Header";
+import paths from "./consts/paths";
 
-function App() {
-  const paths = {
-    home: "/",
-    games: "/games",
-    about: "/about",
-    register: "/register",
-    activeGame: "/game/:type",
-  };
+function App() {  
   return (
     <>
       <Header />
