@@ -9,9 +9,9 @@ export default function AllGames() {
   return (
     <div>
       <Header />
-      {/* <Roulette /> */}
+      <Roulette />
       {/* <Turtles /> */}
-      <Interviewer />
+      {/* <Interviewer /> */}
     </div>
   );
 }
