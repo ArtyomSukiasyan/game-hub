@@ -78,7 +78,6 @@ export default function GameList() {
             </div>
             <div className={styles.textPart}>
               <h2>{d.title}</h2>
-              {/* <p>{d.description}</p> */}
             </div>
           </Link>
         ))}
