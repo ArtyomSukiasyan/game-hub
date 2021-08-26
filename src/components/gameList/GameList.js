@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import interviewer from "../../img/interviewer.PNG";
 import sudoku from "../../img/sudoku.PNG";
 import mines from "../../img/mines.PNG";
-import roulette from "../../img/roulette.PNG";
+import roulette from "../../img/roulette.png";
 import turtles from "../../img/turtles.PNG";
 import game2048 from "../../img/2048.PNG";
 import ticTacToe from "../../img/ticTacToe.PNG";
