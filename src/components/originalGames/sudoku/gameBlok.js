@@ -14,4 +14,5 @@ const CreateBlok = ({ arrMtr }) => {
   );
   return <div className={styles.bigNumberBlok}>{blok}</div>;
 };
+
 export default CreateBlok;

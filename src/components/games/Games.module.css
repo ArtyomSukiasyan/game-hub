@@ -1,6 +1,5 @@
 .games {
-  margin: 30px 10% 0 10%;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  margin: 30px 5% 0 18%;
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
 }

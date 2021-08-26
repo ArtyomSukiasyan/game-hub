@@ -4,14 +4,10 @@ import { NavLink } from "react-router-dom";
 import logo from "../../img/lg.png";
 import Language from "../language/Language";
 import styles from "./Header.module.css";
+import paths from '../../consts/paths' 
 
 export default function Header() {
-  const paths = {
-    home: "/",
-    games: "/games",
-    about: "/about",
-    register: "/register",
-  };
+  
 
   return (
     <header className={styles.header}>
