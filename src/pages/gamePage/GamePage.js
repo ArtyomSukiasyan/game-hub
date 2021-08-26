@@ -7,6 +7,7 @@ import Roulette from "../../components/originalGames/roulette/Game";
 import Sudoku from "../../components/originalGames/sudoku/sudoku";
 import TacToe from "../../components/originalGames/TicTacToe/Components/TacToe/TacToe";
 import Turtles from "../../components/originalGames/turtlesMemory/Turtles";
+import RockPaperScissors from "../../components/originalGames/rockPaperScissors/RockPaperScissors";
 
 export default function GamePage() {
   const { type } = useParams();
@@ -27,10 +28,8 @@ export default function GamePage() {
       return (game = <Roulette />);
     case "2048":
       return (game = <Game2048 />);
+    case "RockPaperScissors":
+      return (game = <RockPaperScissors />);
   }
-  return (
-    <div>
-      {game}
-    </div>
-  );
+  return <div>{game}</div>;
 }

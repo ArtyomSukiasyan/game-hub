@@ -7,6 +7,7 @@ import roulette from "../../img/roulette.png";
 import turtles from "../../img/turtles.PNG";
 import game2048 from "../../img/2048.PNG";
 import ticTacToe from "../../img/ticTacToe.PNG";
+import rockPaper from '../../img/rock.png'
 import styles from "./GameList.module.css";
 
 export default function GameList() {
@@ -62,6 +63,13 @@ export default function GameList() {
       id: 7,
       route: "/game/mines",
     },
+    {
+      url: rockPaper,
+      title: "Rock_Paper_Scissors",
+      description: "some description4",
+      id: 8,
+      route: "/game/RockPaperScissors",
+    },
   ];
 
   useEffect(() => {
@@ -78,7 +86,6 @@ export default function GameList() {
             </div>
             <div className={styles.textPart}>
               <h2>{d.title}</h2>
-              {/* <p>{d.description}</p> */}
             </div>
           </Link>
         ))}
