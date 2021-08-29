@@ -6,7 +6,7 @@ import WrongLetters from "./components/WrongLetters";
 import Word from "./components/Word";
 import Popup from "./components/Popup";
 import Notification from "./components/Notification";
-import "./styles/Hangman.css";
+import "./Hangman.css";
 
 const words = [
   "abjad",
