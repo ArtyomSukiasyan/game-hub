@@ -8,6 +8,7 @@ import Sudoku from "../../components/originalGames/sudoku/sudoku";
 import TacToe from "../../components/originalGames/TicTacToe/Components/TacToe/TacToe";
 import Turtles from "../../components/originalGames/turtlesMemory/Turtles";
 import RockPaperScissors from "../../components/originalGames/rockPaperScissors/RockPaperScissors";
+import Hangman from "../../components/originalGames/hangman/Hangman";
 
 export default function GamePage() {
   const { type } = useParams();
@@ -30,6 +31,8 @@ export default function GamePage() {
       return (game = <Game2048 />);
     case "RockPaperScissors":
       return (game = <RockPaperScissors />);
+    case "hangman":
+      return (game = <Hangman />);
   }
   return <div>{game}</div>;
 }
