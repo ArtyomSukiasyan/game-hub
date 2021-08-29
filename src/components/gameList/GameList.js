@@ -8,6 +8,7 @@ import turtles from "../../img/turtles.PNG";
 import game2048 from "../../img/2048.PNG";
 import ticTacToe from "../../img/ticTacToe.PNG";
 import rockPaper from '../../img/rock.png'
+import hangman from '../../img/hangman.png'
 import styles from "./GameList.module.css";
 
 export default function GameList() {
@@ -69,6 +70,13 @@ export default function GameList() {
       description: "some description4",
       id: 8,
       route: "/game/RockPaperScissors",
+    },
+    {
+      url: hangman,
+      title: "Hangman",
+      description: "some description4",
+      id: 9,
+      route: "/game/hangman",
     },
   ];
 
