@@ -342,6 +342,7 @@ export default class Board extends React.Component {
 
     return true;
   }
+  
   blockersExist(start, end, squares) {
     const startRow = 8 - Math.floor(start / 8);
     const startCol = (start % 8) + 1;
