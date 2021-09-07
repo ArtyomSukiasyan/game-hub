@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useHttp } from "../../../hooks/useHttp";
+import Language from "../../language/Language";
+import MiniLoading from "../../loading/loading";
 import CreateBlok from "./gameBlok";
 
 import { deleteNumbers } from "./getNumbers";
@@ -11,6 +13,7 @@ const Sudoku = () => {
   const [arrMtr, setArrMtr] = useState([]);
   const [gameMtr, setMtr] = useState([]);
   const [isStart, setIsStart] = useState(false);
+  const [load, setLoad] = useState(false);
 
   const { loading, request, error, clearError } = useHttp();
 
@@ -21,6 +24,7 @@ const Sudoku = () => {
       );
       setArrMtr(data);
       setMtr(deleteNumbers(data, index));
+      setLoad(true);
     } catch (e) {}
   };
 
@@ -35,13 +39,17 @@ const Sudoku = () => {
   return (
     <div className={styles.sudoku}>
       {isStart ? (
-        <div className={styles.table_sudoku}>
-          <CreateBlok arrMtr={gameMtr} />
-          <div className={styles.border}></div>
-          <div className={styles.border2}></div>
-          <div className={styles.border3}></div>
-          <div className={styles.border4}></div>
-        </div>
+        load ? (
+          <div className={styles.table_sudoku}>
+            <CreateBlok arrMtr={gameMtr} />
+            <div className={styles.border}></div>
+            <div className={styles.border2}></div>
+            <div className={styles.border3}></div>
+            <div className={styles.border4}></div>
+          </div>
+        ) : (
+          <MiniLoading />
+        )
       ) : (
         <RangeSlider start={start} />
       )}
