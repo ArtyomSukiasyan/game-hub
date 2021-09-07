@@ -10,7 +10,9 @@ export default function Register({ verify }) {
   return (
     <div>
       {loading ? (
-        <Loading />
+        <div style={{ marginTop: "20%", marginLeft: "24%" }}>
+          <Loading />
+        </div>
       ) : (
         <Auth verify={verify} set_loading={set_loading} />
       )}

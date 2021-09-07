@@ -47,7 +47,6 @@ const Auth = ({ verify, set_loading }) => {
         "POST",
         { email: email, userName: userName, password: password }
       );
-      console.log(data);
 
       logIn(email, password, userName);
     } catch (e) {}
@@ -59,7 +58,6 @@ const Auth = ({ verify, set_loading }) => {
     const emailTest = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     if (userName === null) {
       if (passwordTest.test(password) && emailTest.test(email)) {
-        console.log(email, password);
         logIn(email, password);
       }
     } else {

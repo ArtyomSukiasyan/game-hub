@@ -9,7 +9,6 @@ import Register from "../pages/register/Register";
 import Header from "../components/header/Header";
 
 export const useRoutes = (userId, verify) => {
-  console.log("sssss", userId);
   if (!userId) {
     return (
       <Switch>
