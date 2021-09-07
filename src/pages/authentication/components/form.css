@@ -295,6 +295,9 @@ h6 span {
   margin-right: 65px;
   margin-bottom: 10px;
 }
+.mb-pb {
+  margin-left: -17px;
+}
 .conten-center {
   width: 100%;
   display: flex;
