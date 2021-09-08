@@ -230,6 +230,196 @@ export default class Board extends React.Component {
     }
   }
 
+
+  makeMove(squares, start, end, passantPos) {
+    const copySquares = squares.slice();
+    // castling
+    const isKing =
+      copySquares[start].ascii === "k" || copySquares[start].ascii === "K";
+    if (isKing && Math.abs(end - start) === 2) {
+      if (end === (copySquares[start].ascii === "k" ? 62 : 6)) {
+        copySquares[end - 1] = copySquares[end + 1];
+        copySquares[end - 1].highlight = 1;
+        copySquares[end + 1] = new fillerPiece(null);
+        copySquares[end + 1].highlight = 1;
+      } else if (end === (copySquares[start].ascii === "k" ? 58 : 2)) {
+        copySquares[end + 1] = copySquares[end - 2];
+        copySquares[end + 1].highlight = 1;
+        copySquares[end - 2] = new fillerPiece(null);
+        copySquares[end - 2].highlight = 1;
+      }
+    }
+
+    // en passant
+    const passant = passantPos === null ? this.state.passantPos : passantPos;
+    if (copySquares[start].ascii.toLowerCase() === "p") {
+      if (end - start === -7 || end - start === 9) {
+        if (start + 1 === passant)
+          copySquares[start + 1] = new fillerPiece(null);
+      } else if (end - start === -9 || end - start === 7) {
+        if (start - 1 === passant)
+          copySquares[start - 1] = new fillerPiece(null);
+      }
+    }
+
+    copySquares[end] = copySquares[start];
+    copySquares[end].highlight = 1;
+    copySquares[start] = new fillerPiece(null);
+    copySquares[start].highlight = 1;
+
+    // pawn promotion
+    if (copySquares[end].ascii === "p" && end >= 0 && end <= 7) {
+      copySquares[end] = new Queen("w");
+      copySquares[end].highlight = 1;
+    }
+    if (copySquares[end].ascii === "P" && end >= 56 && end <= 63) {
+      copySquares[end] = new Queen("b");
+      copySquares[end].highlight = 1;
+    }
+
+    return copySquares;
+  }
+
+  // returns true if castling is allowed
+  castlingAllowed(start, end, squares) {
+    const copySquares = squares.slice();
+    const player = copySquares[start].player;
+    const deltaPos = end - start;
+    if (start !== (player === "w" ? 60 : 4)) return false;
+    if (
+      (deltaPos === 2
+        ? copySquares[end + 1].ascii
+        : copySquares[end - 2].ascii) !== (player === "w" ? "r" : "R")
+    )
+      return false;
+    if (
+      (player === "w"
+        ? this.state.whiteKingHasMoved
+        : this.state.blackKingHasMoved) !== 0
+    )
+      return false;
+    if (player === "w") {
+      if (
+        (deltaPos === 2
+          ? this.state.rightWhiteRookHasMoved
+          : this.state.leftWhiteRookHasMoved) !== 0
+      )
+        return false;
+    } else if (player === "b") {
+      if (
+        (deltaPos === 2
+          ? this.state.rightBlackRookHasMoved
+          : this.state.leftBlackRookHasMoved) !== 0
+      )
+        return false;
+    }
+
+    return true;
+  }
+  
+  blockersExist(start, end, squares) {
+    const startRow = 8 - Math.floor(start / 8);
+    const startCol = (start % 8) + 1;
+    const endRow = 8 - Math.floor(end / 8);
+    const endCol = (end % 8) + 1;
+    let rowDiff = endRow - startRow;
+    let colDiff = endCol - startCol;
+    let rowCtr = 0;
+    let colCtr = 0;
+    const copySquares = squares.slice();
+
+    while (colCtr !== colDiff || rowCtr !== rowDiff) {
+      let position = 64 - startRow * 8 + -8 * rowCtr + (startCol - 1 + colCtr);
+      if (
+        copySquares[position].ascii !== null &&
+        copySquares[position] !== copySquares[start]
+      )
+        return true;
+      if (colCtr !== colDiff) {
+        if (colDiff > 0) {
+          ++colCtr;
+        } else {
+          --colCtr;
+        }
+      }
+      if (rowCtr !== rowDiff) {
+        if (rowDiff > 0) {
+          ++rowCtr;
+        } else {
+          --rowCtr;
+        }
+      }
+    }
+    return false;
+  }
+  goodPawn(start, end, squares, passantPos) {
+    const passant = passantPos === null ? this.state.passantPos : passantPos;
+    const startRow = 8 - Math.floor(start / 8);
+    const startCol = (start % 8) + 1;
+    const endRow = 8 - Math.floor(end / 8);
+    const endCol = (end % 8) + 1;
+    const rowDiff = endRow - startRow;
+    const colDiff = endCol - startCol;
+    const copySquares = squares.slice();
+
+    if (rowDiff === 2 || rowDiff === -2) {
+      if (copySquares[start].player === "w" && (start < 48 || start > 55))
+        return false;
+      if (copySquares[start].player === "b" && (start < 8 || start > 15))
+        return false;
+    }
+    if (copySquares[end].ascii !== null) {
+      if (colDiff === 0) return false;
+    }
+    if (rowDiff === 1 && colDiff === 1) {
+      if (copySquares[end].ascii === null) {
+        if (copySquares[start + 1].ascii !== "P" || passant !== start + 1)
+          return false;
+      }
+    } else if (rowDiff === 1 && colDiff === -1) {
+      if (copySquares[end].ascii === null) {
+        if (copySquares[start - 1].ascii !== "P" || passant !== start - 1)
+          return false;
+      }
+    } else if (rowDiff === -1 && colDiff === 1) {
+      if (copySquares[end].ascii === null) {
+        if (copySquares[start + 1].ascii !== "p" || passant !== start + 1)
+          return false;
+      }
+    } else if (rowDiff === -1 && colDiff === -1) {
+      if (copySquares[end].ascii === null) {
+        if (copySquares[start - 1].ascii !== "p" || passant !== start - 1)
+          return false;
+      }
+    }
+
+    return true;
+  }
+  invalidMove(start, end, squares, passantPos) {
+    const copySquares = squares.slice();
+    console.log(copySquares);
+    const bqrpk =
+      copySquares[start].ascii.toLowerCase() === "r" ||
+      copySquares[start].ascii.toLowerCase() === "q" ||
+      copySquares[start].ascii.toLowerCase() === "b" ||
+      copySquares[start].ascii.toLowerCase() === "p" ||
+      copySquares[start].ascii.toLowerCase() === "k";
+    let invalid =
+      bqrpk === true && this.blockersExist(start, end, copySquares) === true;
+
+    if (invalid) return invalid;
+    const pawn = copySquares[start].ascii.toLowerCase() === "p";
+    invalid =
+      pawn === true &&
+      this.goodPawn(start, end, copySquares, passantPos) === false;
+    if (invalid) return invalid;
+    const king = copySquares[start].ascii.toLowerCase() === "k";
+    if (king && Math.abs(end - start) === 2)
+      invalid = this.castlingAllowed(start, end, copySquares) === false;
+
+    return invalid;
+  }
+
   canMoveThere(start, end, squares, passantPos) {
     const copySquares = squares.slice();
     if (start === end) return false;

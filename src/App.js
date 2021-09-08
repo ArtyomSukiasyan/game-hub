@@ -1,23 +1,19 @@
-import { Route, Switch } from "react-router-dom";
-import Home from "./pages/home/Home";
-import AllGames from "./pages/allGames/AllGames";
-import About from "./pages/about/About";
-import Register from "./pages/register/Register";
-import GamePage from "./pages/gamePage/GamePage";
-import Header from "./components/header/Header";
-import paths from "./consts/paths";
+import { useState } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import { validToken } from "./helpers/isValidToken";
+import { useRoutes } from "./helpers/routes";
 
-function App() {  
+function App() {
+  const [userId, setUserId] = useState(validToken());
+  const verify = () => {
+    setUserId(validToken());
+  };
+
   return (
     <>
-      <Header />
-      <Switch>
-        <Route exact path={paths.home} component={Home} />
-        <Route path={paths.games} component={AllGames} />
-        <Route path={paths.about} component={About} />
-        <Route path={paths.register} component={Register} />
-        <Route path={paths.activeGame} component={GamePage} />
-      </Switch>
+      <Router>
+        <div className="App">{useRoutes(userId, verify)}</div>
+      </Router>
     </>
   );
 }

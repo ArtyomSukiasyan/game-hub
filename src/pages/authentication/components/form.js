@@ -38,7 +38,7 @@ const Form = ({ onSubmit, onCreate, form, onChangeData }) => {
                     >
                       <div className="center-wrap">
                         <div className="section text-center">
-                          <h4 className="mb-4 pb-3">Log In</h4>
+                          <h4 className="mb-pb">Log In</h4>
                           <div className="form-group">
                             <input
                               type="email"
@@ -80,7 +80,7 @@ const Form = ({ onSubmit, onCreate, form, onChangeData }) => {
                     >
                       <div className="center-wrap">
                         <div className="section text-center">
-                          <h4 className="mb-4 pb-3">Sign Up</h4>
+                          <h4 className="mb-pb">Sign Up</h4>
                           <div className="form-group">
                             <input
                               type="text"
