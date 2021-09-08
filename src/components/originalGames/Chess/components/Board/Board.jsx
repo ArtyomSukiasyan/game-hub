@@ -2,13 +2,16 @@ import React from "react";
 import Square from "../Squares/Squares";
 import Queen from "../../pieces/Queen/Queen";
 import fillerPiece from "../../pieces/piece/Piece";
+import MatchInfo from "../MatchInfo/MatchInfo";
 import initializeBoard from "../../helpers/initializeBoard";
 import clearHighlight from "../../helpers/clearHighlight";
 import clearCheckHighlight from "../../helpers/clearCheckHighlight";
 import clearPossibleHighlight from "../../helpers/clearPossibleHighlight";
 import highlightMate from "../../helpers/highlightMate";
-import Notation from "../../helpers/notation";
 import calcSquareColor from "../../helpers/calcSquareColor";
+import invalidMove from "../../helpers/invalidMove";
+import makeMove from "../../helpers/makeMove";
+import { rowNums, colNums } from "../../constants/colsAndRows";
 import styles from "../../Game.module.css";
 
 export default class Board extends React.Component {
@@ -50,15 +53,7 @@ export default class Board extends React.Component {
   }
 
   reset() {
-    if (
-      this.state.historyNum - 1 === this.state.trueNum &&
-      this.state.turn === "1" &&
-      !this.state.mated
-    ) {
-      return "cannot reset";
-    }
-
-    this.setState({
+      this.setState({
       squares: initializeBoard(),
       source: -1,
       turn: "w",
@@ -97,17 +92,8 @@ export default class Board extends React.Component {
     let copySquares = squares.slice();
 
     copySquares = clearHighlight(copySquares).slice();
-    if (player === "w") {
-      copySquares = clearPossibleHighlight(copySquares).slice();
-      for (let j = 0; j < 64; j++) {
-        if (copySquares[j].ascii === "k") {
-          copySquares[j].inCheck = 0;
-          break;
-        }
-      }
-    }
+    copySquares = clearPossibleHighlight(copySquares).slice();
 
-    // note if king or rook has moved (castling not allowed if these have moved)
     if (copySquares[start].ascii === (player === "w" ? "k" : "K")) {
       if (player === "w") {
         this.setState({
@@ -143,7 +129,6 @@ export default class Board extends React.Component {
       }
     }
 
-    // add captured pieces to collection
     const collection =
       player === "w"
         ? this.state.piecesCollectedByWhite.slice()
@@ -154,10 +139,8 @@ export default class Board extends React.Component {
       });
     }
 
-    // make the move
-    copySquares = this.makeMove(copySquares, start, end).slice();
+    copySquares = makeMove(copySquares, start, end).slice();
 
-    // en passant helper
     const passantTrue =
       player === "w"
         ? copySquares[end].ascii === "p" &&
@@ -169,23 +152,14 @@ export default class Board extends React.Component {
           start <= 15 &&
           end - start === 16;
     let passant = passantTrue ? end : 65;
+    const turn = player === "w" ? "w" : "b";
 
-    // highlight mate
-    if (player === "w") {
-      copySquares = highlightMate(
-        "b",
-        copySquares,
-        this.checkmate("b", copySquares),
-        this.stalemate("b", copySquares)
-      ).slice();
-    } else {
-      copySquares = highlightMate(
-        "w",
-        copySquares,
-        this.checkmate("w", copySquares),
-        this.stalemate("w", copySquares)
-      ).slice();
-    }
+    copySquares = highlightMate(
+      turn,
+      copySquares,
+      this.checkmate(turn, copySquares),
+      this.stalemate(turn, copySquares)
+    ).slice();
 
     const copyHistory = this.state.history.slice();
     const copyHistoryH1 = this.state.historyH1.slice();
@@ -256,7 +230,7 @@ export default class Board extends React.Component {
     }
   }
 
-  // make a move
+
   makeMove(squares, start, end, passantPos) {
     const copySquares = squares.slice();
     // castling
@@ -445,6 +419,7 @@ export default class Board extends React.Component {
 
     return invalid;
   }
+
   canMoveThere(start, end, squares, passantPos) {
     const copySquares = squares.slice();
     if (start === end) return false;
@@ -455,7 +430,20 @@ export default class Board extends React.Component {
       copySquares[start].canMove(start, end) === false
     )
       return false;
-    if (this.invalidMove(start, end, copySquares, passantPos) === true)
+    if (
+      invalidMove(
+        start,
+        end,
+        copySquares,
+        passantPos,
+        this.state.whiteKingHasMoved,
+        this.state.blackKingHasMoved,
+        this.state.rightWhiteRookHasMoved,
+        this.state.leftWhiteRookHasMoved,
+        this.state.rightBlackRookHasMoved,
+        this.state.leftBlackRookHasMoved
+      ) === true
+    )
       return false;
 
     const cantCastle =
@@ -464,7 +452,6 @@ export default class Board extends React.Component {
       this.inCheck(player, copySquares);
     if (cantCastle) return false;
 
-    // king cannot castle through check
     if (
       copySquares[start].ascii === (player === "w" ? "k" : "K") &&
       Math.abs(end - start) === 2
@@ -476,7 +463,6 @@ export default class Board extends React.Component {
       if (this.inCheck(player, testSquares)) return false;
     }
 
-    // player cannot put or keep herself in check
     const checkSquares = squares.slice();
     checkSquares[end] = checkSquares[start];
     checkSquares[start] = new fillerPiece(null);
@@ -490,7 +476,6 @@ export default class Board extends React.Component {
     return true;
   }
 
-  // returns true if player is in check
   inCheck(player, squares) {
     let king = player === "w" ? "k" : "K";
     let positionOfKing = null;
@@ -506,13 +491,24 @@ export default class Board extends React.Component {
       if (copySquares[i].player !== player) {
         if (
           copySquares[i].canMove(i, positionOfKing) === true &&
-          this.invalidMove(i, positionOfKing, copySquares) === false
+          invalidMove(
+            i,
+            positionOfKing,
+            copySquares,
+            this.state.whiteKingHasMoved,
+            this.state.blackKingHasMoved,
+            this.state.rightWhiteRookHasMoved,
+            this.state.leftWhiteRookHasMoved,
+            this.state.rightBlackRookHasMoved,
+            this.state.leftBlackRookHasMoved
+          ) === false
         )
           return true;
       }
     }
     return false;
   }
+
   stalemate(player, squares) {
     if (this.inCheck(player, squares)) return false;
 
@@ -540,12 +536,6 @@ export default class Board extends React.Component {
 
   handleClick(i) {
     let copySquares = this.state.squares.slice();
-
-    if (this.state.historyNum - 1 !== this.state.trueNum) {
-      return "currently viewing history";
-    }
-
-    if (this.state.mated) return "game-over";
 
     if (this.state.source === -1) {
       if (copySquares[i].player !== this.state.turn) return -1;
@@ -622,52 +612,15 @@ export default class Board extends React.Component {
   }
 
   render() {
-    const rowNums = [];
-    for (let i = 8; i > 0; i--) {
-      rowNums.push(<Notation key={i} value={i} />);
-    }
-    const colNums = [];
-    for (let i = 1; i < 9; i++) {
-      let letter;
-      switch (i) {
-        case 1:
-          letter = "A";
-          break;
-        case 2:
-          letter = "B";
-          break;
-        case 3:
-          letter = "C";
-          break;
-        case 4:
-          letter = "D";
-          break;
-        case 5:
-          letter = "E";
-          break;
-        case 6:
-          letter = "F";
-          break;
-        case 7:
-          letter = "G";
-          break;
-        case 8:
-          letter = "H";
-          break;
-        default:
-          break;
-      }
-      colNums.push(<Notation key={letter} value={letter} />);
-    }
-
     const board = [];
     for (let i = 0; i < 8; i++) {
       const squareRows = [];
       for (let j = 0; j < 8; j++) {
         const copySquares = this.state.squares.slice();
         let squareColor = calcSquareColor(i, j, copySquares);
-        let squareCursor = "pointer";
-        if (copySquares[i * 8 + j].player !== "w") squareCursor = "default";
+        let squareCursor;
+        if (copySquares[i * 8 + j].player === this.state.turn)
+          squareCursor = "pointer";
 
         if (this.state.mated) squareCursor = "default";
         if (this.state.historyNum - 1 !== this.state.trueNum)
@@ -687,126 +640,38 @@ export default class Board extends React.Component {
     }
 
     return (
-      <div>
+      <div className={styles.game}>
         <div>
-          <div className={styles.left_screen}>
-            <div className={styles.side_box}>
-              <div className={styles.content + styles.title}>
-                <p className={styles.header_2_font}>Match Information</p>
-              </div>
-
-              <div className={styles.wrapper}>
-                <div className={styles.player_box}>
-                  <p className={styles.medium_font}>White</p>
-                </div>
-                <div className={styles.black_player_color}>
-                  <p className={styles.medium_font}>Black</p>
-                </div>
-              </div>
-              <div className={styles.wrapper}>
-                {this.state.turn === "w" ? (
-                  <div className={styles.highlight_box}></div>
-                ) : (
-                  <div className={styles.transparent}></div>
-                )}
-                {this.state.turn === "b" ? (
-                  <div className={styles.highlight_box}></div>
-                ) : (
-                  <div className={styles.transparent}></div>
-                )}
-              </div>
-
-              <div className={styles.button_wrapper}>
-                <button
-                  className={styles.reset_button}
-                  onClick={() => this.viewHistory("back_atw")}
-                >
-                  <p className={styles.button_font}>&lt;&lt;</p>
-                </button>
-                <button
-                  className={styles.reset_button}
-                  onClick={() => this.viewHistory("back")}
-                >
-                  <p className={styles.button_font}>&lt;</p>
-                </button>
-                <button
-                  className={styles.reset_button}
-                  onClick={() => this.reset()}
-                >
-                  <p className={styles.button_font}>Restart Game</p>
-                </button>
-                <button
-                  className={styles.reset_button}
-                  onClick={() => this.viewHistory("next")}
-                >
-                  <p className={styles.button_font}>&gt;</p>
-                </button>
-                <button
-                  className={styles.reset_button}
-                  onClick={() => this.viewHistory("next_atw")}
-                >
-                  <p className={styles.button_font}>&gt;&gt;</p>
-                </button>
-              </div>
-
-              <div className={styles.mate_wrapper}>
-                <p>
-                  {this.inCheck("w", this.state.squares) &&
-                  !this.checkmate("w", this.state.squares) === true
-                    ? "White is in check!"
-                    : ""}
-                </p>
-                <p>
-                  {this.inCheck("b", this.state.squares) &&
-                  !this.checkmate("b", this.state.squares) === true
-                    ? "Black is in check."
-                    : ""}
-                </p>
-                <p>
-                  {this.checkmate("w", this.state.squares) === true
-                    ? "Black won by checkmate."
-                    : ""}
-                </p>
-                <p>
-                  {this.checkmate("b", this.state.squares) === true
-                    ? "White won by checkmate!"
-                    : ""}
-                </p>
-                <p>
-                  {(this.stalemate("w", this.state.squares) &&
-                    this.state.turn === "w") === true
-                    ? "White are in stalemate. Game over."
-                    : ""}
-                </p>
-                <p>
-                  {(this.stalemate("b", this.state.squares) &&
-                    this.state.turn === "b") === true
-                    ? "Black is in stalemate. Game over."
-                    : ""}
-                </p>
-              </div>
+          <div className={styles.board}>
+            <div className={styles.row_label}> {rowNums} </div>
+            <div>
+              <div className={styles.table}> {board} </div>
+              <div className={styles.col_label}> {colNums} </div>
             </div>
           </div>
+          <MatchInfo
+            turn={this.state.turn}
+            backAtw={() => this.viewHistory("back_atw")}
+            back={() => this.viewHistory("back")}
+            reset={() => this.reset()}
+            next={() => this.viewHistory("next")}
+            nextAtw={() => this.viewHistory("next_atw")}
+          />
+        </div>
+        <div className={styles.wrapper}>
+          <div
+            className={this.state.turn === "w" ? styles.white_move : ""}
+          ></div>
 
-          <div className={styles.right_screen}>
-            <div className={styles.row_label}> {rowNums} </div>
-            <div className={styles.table}> {board} </div>
-            <div className={styles.col_label}> {colNums} </div>
-          </div>
+          <div
+            className={this.state.turn === "b" ? styles.black_move : ""}
+          ></div>
         </div>
       </div>
     );
   }
 
   viewHistory(direction) {
-    if (
-      this.state.historyNum - 1 === this.state.trueNum &&
-      this.state.turn === "1" &&
-      !this.state.mated
-    ) {
-      return "not allowed to view history";
-    }
-
     let copySquares = null;
     let copyWhiteCollection = null;
     let copyBlackCollection = null;
@@ -840,7 +705,7 @@ export default class Board extends React.Component {
       copyBlackCollection =
         this.state.historyBlackCollection[this.state.historyNum];
     } else {
-      return "no more history";
+      return null;
     }
 
     copySquares = clearPossibleHighlight(copySquares).slice();
