@@ -5,7 +5,7 @@ import { loadState, saveState } from "../../Helpers/localStorage";
 import styles from "./TacToe.module.css";
 
 const X = "X";
-const Y = "Y";
+const O = "O";
 
 export default function TacToe() {
   const [squares, setSquares] = useState(
@@ -30,7 +30,7 @@ export default function TacToe() {
   ];
 
   const isWinner = () => {
-    const s = count % 2 === 0 ? X : Y;
+    const s = count % 2 === 0 ? X : O;
 
     for (let i = 0; i < winnerLine.length; i++) {
       const line = winnerLine[i];
@@ -59,7 +59,7 @@ export default function TacToe() {
     if (result === "") {
       const data = e.target.getAttribute("data");
       if (squares[data] === null) {
-        squares[data] = count % 2 === 0 ? X : Y;
+        squares[data] = count % 2 === 0 ? X : O
         setSquares(squares);
         setCount(count + 1);
       } else {
