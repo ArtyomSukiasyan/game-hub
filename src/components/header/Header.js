@@ -4,11 +4,9 @@ import { NavLink } from "react-router-dom";
 import logo from "../../img/lg.png";
 import Language from "../language/Language";
 import styles from "./Header.module.css";
-import paths from '../../consts/paths' 
+import paths from "../../consts/paths";
 
-export default function Header() {
-  
-
+export default function Header({ id }) {
   return (
     <header className={styles.header}>
       <div>
@@ -16,12 +14,12 @@ export default function Header() {
       </div>
       <nav className={styles.navigation}>
         <b>
-          <NavLink exact to={paths.home} activeClassName={styles.selected}>
+          <NavLink exact to={"/home/" + id} activeClassName={styles.selected}>
             Home
           </NavLink>
         </b>
         <b>
-          <NavLink to={paths.games} activeClassName={styles.selected}>
+          <NavLink to={"/games/" + id} activeClassName={styles.selected}>
             Games
           </NavLink>
         </b>

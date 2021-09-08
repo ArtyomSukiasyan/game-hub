@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { saveState } from "../../helpers/localStorage";
 import { useHttp } from "../../hooks/useHttp";
 
 import Form from "./components/form";
 
-const Auth = () => {
+const Auth = ({ verify, set_loading }) => {
   const [form, setForm] = useState({
     logEmail: "",
     logPassword: "",
@@ -14,6 +15,7 @@ const Auth = () => {
   const { loading, request, error, clearError } = useHttp();
 
   const logIn = async (email, password, userName) => {
+    await set_loading(true);
     try {
       const data = await request(
         "https://shavarshgame.herokuapp.com/api/login/",
@@ -32,10 +34,13 @@ const Auth = () => {
         );
       }
 
-      localStorage.setItem("auth", JSON.stringify(data));
+      saveState(JSON.stringify(data), "auth");
+      verify();
     } catch (e) {}
+    set_loading(false);
   };
   const signUp = async (userName, email, password) => {
+    await set_loading(true);
     try {
       const data = await request(
         "https://shavarshgame.herokuapp.com/api/register/",
@@ -54,7 +59,6 @@ const Auth = () => {
     if (userName === null) {
       if (passwordTest.test(password) && emailTest.test(email)) {
         logIn(email, password);
-      } else {
       }
     } else {
       if (
@@ -67,7 +71,7 @@ const Auth = () => {
     }
   };
   const onSubmit = (data) => {
-    isValid(data.email, null, data.password);
+    isValid(data.logEmail, null, data.logPassword);
   };
   const onCreate = (data) => {
     isValid(data.email, data.userName, data.password);

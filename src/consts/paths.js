@@ -1,9 +1,9 @@
 const paths = {
-  home: "/",
-  games: "/games",
+  home: "/home/:id",
+  games: "/games/:id",
   about: "/about",
   register: "/register",
   activeGame: "/game/:type",
 };
 
-export default paths
+export default paths;
