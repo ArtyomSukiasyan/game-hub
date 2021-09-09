@@ -24,7 +24,7 @@ const Auth = ({ verify, set_loading }) => {
       );
 
       if (userName) {
-        const newData = await request(
+        await request(
           "https://shavarshgame.herokuapp.com/api/generate/",
           "POST",
           { owner: data.userId, userName: userName },
