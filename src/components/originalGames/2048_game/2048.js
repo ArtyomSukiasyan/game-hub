@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
+import { useHttp } from "../../../hooks/useHttp";
 
 import check from "./check";
 import pour from "./pour";
 import startEvent from "./startEvent";
 import isSimilar from "./isSimilar";
 import styles from "./style.module.css";
+import { saveData } from "./saveData";
 
 const start = "start";
 const gameSize = 4;
@@ -13,6 +15,8 @@ const Game2048 = () => {
   const [gametablevalue, setgametablevalue] = useState([]);
   const [table, setTable] = useState(null);
   const [points, setPoints] = useState(0);
+
+  const { request } = useHttp();
 
   const move = useCallback((newМatrix) => {
     if (gametablevalue.length !== 0) {
@@ -24,6 +28,7 @@ const Game2048 = () => {
       setTable(check(value));
     }
   });
+
   useEffect(() => {
     const game_points = gametablevalue.reduce((acc, item) => {
       acc += item.reduce((acc2, item2) => {
@@ -34,6 +39,10 @@ const Game2048 = () => {
     }, 0);
     setPoints(game_points);
   }, [gametablevalue]);
+
+  const save = () => {
+    saveData(request, points);
+  };
 
   useEffect(() => {
     let value = [];
@@ -63,6 +72,13 @@ const Game2048 = () => {
           <div className={styles.bloom}></div>
         </div>
       </div>
+      <button
+        onClick={save}
+        style={{ top: "260px" }}
+        className={styles.number_thing}
+      >
+        save
+      </button>
       <div className={styles.gamBam}>
         <div className={styles.gamBamBord}>{table}</div>
       </div>
