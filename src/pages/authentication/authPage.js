@@ -35,14 +35,14 @@ const Auth = ({ verify, set_loading }) => {
       }
 
       saveState(JSON.stringify(data), "auth");
-      verify();
+      await verify();
     } catch (e) {}
     set_loading(false);
   };
   const signUp = async (userName, email, password) => {
     await set_loading(true);
     try {
-      const data = await request(
+      await request(
         "https://shavarshgame.herokuapp.com/api/register/",
         "POST",
         { email: email, userName: userName, password: password }
