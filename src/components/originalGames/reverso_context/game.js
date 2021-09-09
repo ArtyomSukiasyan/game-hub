@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Cards from "./getDataCards";
 import styles from "./style.module.css";
 import { io } from "socket.io-client";
-import Form from "./step0ne";
+import Form from "./stepOne";
 import { isCardsSuitable } from "./gameFunc";
 import Loading from "../../loading/loading";
 
