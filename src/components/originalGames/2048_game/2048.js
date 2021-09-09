@@ -41,7 +41,6 @@ const Game2048 = () => {
   }, [gametablevalue]);
 
   const save = () => {
-    console.log(points);
     saveData(request, points);
   };
 
