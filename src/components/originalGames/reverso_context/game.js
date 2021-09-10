@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
-import Cards from "./getDataCards";
 import styles from "./style.module.css";
 import { io } from "socket.io-client";
+
+import Cards from "./getDataCards";
 import Form from "./stepOne";
 import { isCardsSuitable } from "./gameFunc";
 import Loading from "../../loading/loading";
+import { losses, victories } from "../../../helpers/results_of_the_game";
+import { useHttp } from "../../../hooks/useHttp";
 
 const socket = io("http://shavarshgame.herokuapp.com");
 
 const tableImg =
   "https://media.istockphoto.com/photos/green-poker-table-background-picture-id643199720?k=6&m=643199720&s=170667a&w=0&h=a6gzxiCk7LHz-l1oDNsXfCcUQXkuIfdw9AV4KFroYqg=";
+
 function ReverContext() {
   const [selected, setSelectedCard] = useState(null);
   const [roome, setRoom] = useState("");
@@ -23,33 +27,43 @@ function ReverContext() {
   const [cartLength, setCartLength] = useState(6);
   const [takeRandom, setTakeRandom] = useState(false);
 
+  const { request } = useHttp();
+
   const changeImput = (e) => {
     setRoom(e.target.value);
   };
 
   const submit = () => {
     setLoading(true);
+
     socket.emit("ROOM:JOIN", {
       roomId: roome,
       userName: Math.floor(Math.random() * 10),
     });
+
     socket.on("ROOM:SET_USERS", (data) => {
       const getData = JSON.parse(data);
-
       setCartData(getData.myCard);
       setPrimary(getData.primary);
       setRandomCard(getData.random[0]);
 
       setCondition(!data);
     });
+
     socket.on("SAY:SOMETHING", (data) => {
       const getData = JSON.parse(data);
 
       setCartLength(getData.data.cardsLength);
+
       if (getData.data.deleteRandom) {
         setRandomCard(false);
       }
+      if (getData.data.losses) {
+        losses(request);
+        alert("losses");
+      }
     });
+
     socket.on("ROOM:SET_USERS_CARDS", (data) => {
       const getData = JSON.parse(data);
 
@@ -62,8 +76,17 @@ function ReverContext() {
       setCartData(data2.myCard.filter((item) => item));
 
       if (newArr.length === 0) {
-        // console.log("du krir");
+        victories(request);
+
+        socket.emit("SAY:SOMETHING", {
+          roome,
+          data: JSON.stringify({
+            losses: true,
+          }),
+        });
+        alert("victories");
       }
+
       const allCards = JSON.stringify(data2.allCards);
 
       setAllCards(data2.allCards);
