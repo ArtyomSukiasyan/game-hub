@@ -1,4 +1,4 @@
-import { loadState } from "../components/originalGames/TicTacToe/Helpers/localStorage";
+import { loadState } from "./localStorage";
 
 export const validToken = async (request) => {
   try {

@@ -38,6 +38,7 @@ export const MainTableCards = (data, compare, primary, selected) => {
     </div>
   ));
 };
+
 export const rival = (length = 6, left) => {
   let newData = [];
   for (let index = 0; index < length; index++) {
