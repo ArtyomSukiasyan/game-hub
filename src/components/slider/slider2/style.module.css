@@ -1,0 +1,76 @@
+.center {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+  /* align-content: center; */
+}
+.flex {
+  display: flex;
+  justify-content: center;
+  border-style: solid;
+  border-color: rgba(80, 70, 133, 0.041);
+  background-color: rgba(53, 48, 78, 0.041);
+  /* align-content: center; */
+  padding: 20px;
+}
+
+.mainSlid {
+  width: 720px;
+  height: 360px;
+  /* background-color: cadetblue; */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.allSlid {
+  width: 160px;
+  height: 100%;
+  margin-left: 16px;
+  /* background-color: cadetblue; */
+}
+.miniImg {
+  width: 46px;
+  height: 46px;
+  border-radius: 15%;
+  position: relative;
+  opacity: 0.8;
+  top: 4px;
+  left: 4px;
+  z-index: 10;
+}
+.miniSlideImg {
+  position: relative;
+  cursor: pointer;
+  width: 150px;
+  border-radius: 5px;
+  margin: 4px;
+  height: 52px;
+  margin-top: 7px;
+  /* background-color: rgb(88, 88, 88); */
+  overflow: hidden;
+}
+.miniSlideImg:hover {
+  background-color: rgb(92, 71, 64);
+}
+.blokLeft {
+  position: absolute;
+  background-color: nane;
+}
+.bigImg {
+  width: 720px;
+  border-radius: 5px;
+  height: auto;
+  /* transition: all 1s ease; */
+}
+.imgBigBlok {
+  overflow: hidden;
+}
+.imgFlex {
+  display: flex;
+}
+.textName {
+  position: relative;
+  left: 16px;
+  z-index: 12;
+}

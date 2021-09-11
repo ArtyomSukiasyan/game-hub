@@ -33,7 +33,7 @@ export default function Header({ id }) {
         <Language />
         <IconButton>
           <PersonIcon className={styles.icon} />
-          <NavLink to={paths.register}>Log In</NavLink>
+          <NavLink to={paths.register}>Log out</NavLink>
         </IconButton>
       </div>
     </header>

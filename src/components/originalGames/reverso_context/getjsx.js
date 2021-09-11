@@ -3,6 +3,7 @@ const png = ".png";
 const imgUrl = "https://www.dcode.fr/tools/playing-cards/images/";
 const closImg =
   "https://cdn-ru.bitrix24.ru/b16851/landing/822/822886adc607e9b079415036c2b14f60/Sinie_rombiki_1x.jpg";
+
 export const CartClosed = (img_id) => {
   return (
     <div>

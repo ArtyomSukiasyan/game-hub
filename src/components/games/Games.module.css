@@ -1,5 +1,21 @@
 .games {
-  margin: 30px 5% 0 18%;
+  margin: 30px 5% 0 10%;
   display: grid;
-  grid-template-columns: 30% 30% 30%;
+  grid-template-columns: 25% 25% 25% 25%;
+}
+
+.flex_center {
+  display: flex;
+  justify-content: center;
+}
+
+.contener {
+  margin-top: 32px;
+  width: 80%;
+  padding-bottom: 0px;
+  /* background-color: blue; */
+}
+.gameName {
+  position: relative;
+  top: 30px;
 }
