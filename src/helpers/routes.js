@@ -23,7 +23,7 @@ export const useRoutes = (userId, verify) => {
 
   return (
     <>
-      <Header id={userId} />
+      <Header id={userId} verify={verify} />
       <Switch>
         <Route exact path={paths.home} component={Home} />
         <Route path={paths.games} component={AllGames} />

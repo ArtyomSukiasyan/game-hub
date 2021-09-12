@@ -6,9 +6,9 @@ const arr = [
   {
     img: "https://images.crazygames.com/2048-multiplayer-qbs/20210326145509/2048-multiplayer-qbs-cover?auto=format,compress&q=75&cs=strip&ch=DPR&w=1200&h=630&fit=crop",
     miniImg:
-      "https://lh3.googleusercontent.com/proxy/vgbPxcjrw4xECipRibQucYKR6FUrGV1Lq4snDQUTzcAZH7WZnHijfancUBhI_Da2ask_5bbb0NMwvzLq8PH_xXyOP5lprLzqDLL3NAlc1y62oPxcPFeWv_hVJp_X5g9z",
+      "https://www3.minijuegosgratis.com/v3/games/thumbnails/228958_7_sq.jpg",
     text: "Shavarsh astvatain",
-    gameName: "2048 maladec",
+    gameName: "2048",
   },
   {
     img: "https://www.nintendo.com//content/dam/noa/es_LA/games/switch/s/sudoku-relax-2-summer-waves-switch/sudoku-relax-2-summer-waves-switch-hero.jpg",
@@ -62,7 +62,6 @@ const MySlder = () => {
     }, 8000);
     return () => {
       clearTimeout(timer);
-      console.log("maladec");
     };
   }, [queue]);
 
@@ -72,7 +71,6 @@ const MySlder = () => {
   };
 
   const slidData = useMemo(() => {
-    console.log(queue);
     return arr.map((item, index) => (
       <SlidBox
         key={index}

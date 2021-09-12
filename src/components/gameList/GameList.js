@@ -11,6 +11,7 @@ import rockPaper from "../../img/rock.png";
 import hangman from "../../img/hangman.png";
 import styles from "./GameList.module.css";
 import reverso from "../../img/12.09.2021_00.21.00_REC.png";
+import chessImg from "../../img/chess.png";
 
 export default function GameList() {
   const [games, setGames] = useState(null);
@@ -83,8 +84,15 @@ export default function GameList() {
       url: reverso,
       title: "Reverso context",
       description: "some description4",
-      id: 9,
+      id: 10,
       route: "/game/reverso_context",
+    },
+    {
+      url: chessImg,
+      title: "Chess",
+      description: "some description4",
+      id: 11,
+      route: "/game/chess",
     },
   ];
 
