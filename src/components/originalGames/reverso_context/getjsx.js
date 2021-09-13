@@ -1,4 +1,5 @@
 import styles from "./style.module.css";
+
 const png = ".png";
 const imgUrl = "https://www.dcode.fr/tools/playing-cards/images/";
 const closImg =

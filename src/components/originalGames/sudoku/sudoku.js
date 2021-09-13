@@ -9,20 +9,18 @@ import RangeSlider from "./range_Slider";
 
 import styles from "./style.module.css";
 
+const url = "https://shavarshgame.herokuapp.com/api/sudoku/";
+
 const Sudoku = () => {
-  const [arrMtr, setArrMtr] = useState([]);
   const [gameMtr, setMtr] = useState([]);
   const [isStart, setIsStart] = useState(false);
   const [load, setLoad] = useState(false);
 
-  const { loading, request, error, clearError } = useHttp();
+  const { request } = useHttp();
 
   const setData = async (index) => {
     try {
-      const data = await request(
-        "https://shavarshgame.herokuapp.com/api/sudoku/"
-      );
-      setArrMtr(data);
+      const data = await request(url);
       setMtr(deleteNumbers(data, index));
       setLoad(true);
     } catch (e) {}
