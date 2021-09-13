@@ -1,12 +1,21 @@
 import PersonIcon from "@material-ui/icons/Person";
 import { IconButton } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import logo from "../../img/lg.png";
 import Language from "../language/Language";
 import styles from "./Header.module.css";
 import paths from "../../consts/paths";
+import { saveState } from "../../helpers/localStorage";
 
-export default function Header({ id }) {
+export default function Header({ id, verify }) {
+  let history = useHistory();
+  const logOut = () => {
+    saveState("", "auth");
+    history.push("/login");
+    verify();
+  };
+
   return (
     <header className={styles.header}>
       <div>
@@ -29,11 +38,11 @@ export default function Header({ id }) {
           </NavLink>
         </b>
       </nav>
-      <div className={styles.icons}>
+      <div onClick={logOut} className={styles.icons}>
         <Language />
         <IconButton>
           <PersonIcon className={styles.icon} />
-          <NavLink to={paths.register}>Log In</NavLink>
+          <NavLink to={paths.register}>Log out</NavLink>
         </IconButton>
       </div>
     </header>

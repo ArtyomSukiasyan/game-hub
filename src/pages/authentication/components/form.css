@@ -231,6 +231,8 @@ h6 span {
 }
 
 .btn {
+  margin-left: -56px;
+  margin-top: 32px;
   border-radius: 4px;
   height: 44px;
   font-size: 13px;
@@ -296,7 +298,8 @@ h6 span {
   margin-bottom: 10px;
 }
 .mb-pb {
-  margin-left: -17px;
+  margin-left: -57px;
+  margin-bottom: 32px;
 }
 .conten-center {
   width: 100%;
@@ -304,6 +307,7 @@ h6 span {
   justify-content: center;
 }
 .text-center {
+  margin-left: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;

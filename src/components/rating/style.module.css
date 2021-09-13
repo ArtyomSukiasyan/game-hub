@@ -1,0 +1,53 @@
+.center {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  align-content: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 80%;
+  height: 160px;
+  margin-top: 36px;
+  /* border-top: chartreuse; */
+  border-color: rgba(80, 72, 197, 0.103);
+  border-style: solid;
+
+  /* background-color: rgba(53, 48, 78, 0.315); */
+}
+
+.flex_center {
+  display: flex;
+  justify-content: center;
+}
+
+.contener {
+  margin-top: 32px;
+  width: 80%;
+  padding-bottom: 0px;
+  /* background-color: blue; */
+}
+.gameName {
+  position: relative;
+  top: 30px;
+}
+.rBox {
+  /* bor */
+  border-style: solid;
+  /* border-color: hsl(89, 19%, 35%); */
+  height: 140px;
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 100px;
+  position: relative;
+  /* background-color: rgb(60, 60, 63); */
+  border-color: rgba(72, 168, 197, 0.13);
+  background-color: rgba(53, 48, 78, 0.315);
+  border-radius: 5px;
+  padding-left: 5px;
+  cursor: pointer;
+}

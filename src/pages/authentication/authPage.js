@@ -59,6 +59,8 @@ const Auth = ({ verify, set_loading }) => {
     if (userName === null) {
       if (passwordTest.test(password) && emailTest.test(email)) {
         logIn(email, password);
+      } else {
+        alert("invalid password");
       }
     } else {
       if (
@@ -67,6 +69,8 @@ const Auth = ({ verify, set_loading }) => {
         emailTest.test(email)
       ) {
         signUp(userName, email, password);
+      } else {
+        alert("invalid password");
       }
     }
   };

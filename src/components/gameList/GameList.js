@@ -7,9 +7,11 @@ import roulette from "../../img/roulette.png";
 import turtles from "../../img/turtles.PNG";
 import game2048 from "../../img/2048.PNG";
 import ticTacToe from "../../img/ticTacToe.PNG";
-import rockPaper from '../../img/rock.png'
-import hangman from '../../img/hangman.png'
+import rockPaper from "../../img/rock.png";
+import hangman from "../../img/hangman.png";
 import styles from "./GameList.module.css";
+import reverso from "../../img/12.09.2021_00.21.00_REC.png";
+import chessImg from "../../img/chess.png";
 
 export default function GameList() {
   const [games, setGames] = useState(null);
@@ -78,6 +80,20 @@ export default function GameList() {
       id: 9,
       route: "/game/hangman",
     },
+    {
+      url: reverso,
+      title: "Reverso context",
+      description: "some description4",
+      id: 10,
+      route: "/game/reverso_context",
+    },
+    {
+      url: chessImg,
+      title: "Chess",
+      description: "some description4",
+      id: 11,
+      route: "/game/chess",
+    },
   ];
 
   useEffect(() => {
@@ -90,10 +106,10 @@ export default function GameList() {
         games.map((d) => (
           <Link to={d.route} key={d.id} className={styles.forOneGame}>
             <div className={styles.forImg}>
-              <img alt="gameName" src={d.url} />
+              <img className={styles.gameImg} alt="gameName" src={d.url} />
             </div>
             <div className={styles.textPart}>
-              <h2>{d.title}</h2>
+              <p>{d.title}</p>
             </div>
           </Link>
         ))}

@@ -9,6 +9,8 @@ import TacToe from "../../components/originalGames/TicTacToe/Components/TacToe/T
 import Turtles from "../../components/originalGames/turtlesMemory/Turtles";
 import RockPaperScissors from "../../components/originalGames/rockPaperScissors/RockPaperScissors";
 import Hangman from "../../components/originalGames/hangman/Hangman";
+import ReverContext from "../../components/originalGames/reverso_context/game";
+import Game from "../../components/originalGames/Chess/Game";
 
 export default function GamePage() {
   const { type } = useParams();
@@ -33,6 +35,10 @@ export default function GamePage() {
       return (game = <RockPaperScissors />);
     case "hangman":
       return (game = <Hangman />);
+    case "reverso_context":
+      return (game = <ReverContext />);
+    case "chess":
+      return (game = <Game />);
   }
   return <div>{game}</div>;
 }
