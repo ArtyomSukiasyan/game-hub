@@ -1,0 +1,48 @@
+.member {
+  position: relative;
+  background-color: #000;
+  min-height: 300px;
+  width: 250px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.member .imgBx {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.member .imgBx img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.member .details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  transition: 0.2s;
+  opacity: 0;
+}
+.member:hover .details {
+  opacity: 1;
+}
+.member .details h2 {
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
