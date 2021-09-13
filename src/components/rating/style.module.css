@@ -7,7 +7,7 @@
 
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   overflow: hidden;
   width: 80%;
@@ -50,4 +50,5 @@
   border-radius: 5px;
   padding-left: 5px;
   cursor: pointer;
+  min-width: 100px;
 }
