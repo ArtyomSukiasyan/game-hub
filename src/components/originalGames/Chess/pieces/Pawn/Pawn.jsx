@@ -1,5 +1,7 @@
-import whitePawn from "../../images/whitePawn.png";
-import blackPawn from "../../images/blackPawn.png";
+import { white } from "../../constants/players";
+import { whitePawn, blackPawn } from "../../constants/asciis";
+import whitePawnImage from "../../images/whitePawn.png";
+import blackPawnImage from "../../images/blackPawn.png";
 import styles from "../../Game.module.css";
 
 export default class Pawn {
@@ -8,12 +10,12 @@ export default class Pawn {
     this.highlight = 0;
     this.possible = 0;
     this.icon =
-      player === "w" ? (
-        <img src={whitePawn} className={styles.piece} alt="WP"></img>
+      player === white ? (
+        <img src={whitePawnImage} className={styles.piece} alt="whitePawn"></img>
       ) : (
-        <img src={blackPawn} className={styles.piece} alt="BP"></img>
+        <img src={blackPawnImage} className={styles.piece} alt="blackPawn"></img>
       );
-    this.ascii = player === "w" ? "p" : "P";
+    this.ascii = player === white ? whitePawn : blackPawn;
   }
 
   canMove(start, end) {
@@ -25,7 +27,7 @@ export default class Pawn {
     const rowDiff = endRow - startRow;
     const colDiff = endCol - startCol;
 
-    if (this.player === "w") {
+    if (this.player === white) {
       if (colDiff === 0) {
         if (rowDiff === 1 || rowDiff === 2) return true;
       } else if (colDiff === -1 || colDiff === 1) {
