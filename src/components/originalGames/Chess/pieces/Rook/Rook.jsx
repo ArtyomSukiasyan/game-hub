@@ -1,5 +1,7 @@
-import whiteRook from "../../images/whiteRook.png";
-import blackRook from "../../images/blackRook.png";
+import { white } from "../../constants/players";
+import { whiteRook, blackRook } from "../../constants/asciis";
+import whiteRookImage from "../../images/whiteRook.png";
+import blackRookImage from "../../images/blackRook.png";
 import styles from "../../Game.module.css";
 
 export default class Rook {
@@ -8,32 +10,31 @@ export default class Rook {
     this.highlight = 0;
     this.possible = 0;
     this.icon =
-      player === "w" ? (
-        <img src={whiteRook} className={styles.piece} alt="WR"></img>
+      player === white ? (
+        <img
+          src={whiteRookImage}
+          className={styles.piece}
+          alt="whiteRook"
+        ></img>
       ) : (
-        <img src={blackRook} className={styles.piece} alt="BR"></img>
+        <img
+          src={blackRookImage}
+          className={styles.piece}
+          alt="blackRook"
+        ></img>
       );
-    this.ascii = player === "w" ? "r" : "R";
+    this.ascii = player === white ? whiteRook : blackRook;
   }
 
   canMove(start, end) {
-    const start_row = 8 - Math.floor(start / 8);
-    const start_col = (start % 8) + 1;
-    const end_row = 8 - Math.floor(end / 8);
-    const end_col = (end % 8) + 1;
+    const startRow = 8 - Math.floor(start / 8);
+    const startCol = (start % 8) + 1;
+    const endRow = 8 - Math.floor(end / 8);
+    const endCol = (end % 8) + 1;
 
-    const rowDiff = end_row - start_row;
-    const colDiff = end_col - start_col;
+    const rowDiff = endRow - startRow;
+    const colDiff = endCol - startCol;
 
-    if (rowDiff > 0 && colDiff === 0) {
-      return true;
-    } else if (rowDiff === 0 && colDiff > 0) {
-      return true;
-    } else if (rowDiff < 0 && colDiff === 0) {
-      return true;
-    } else if (rowDiff === 0 && colDiff < 0) {
-      return true;
-    }
-    return false;
+    return rowDiff * colDiff === 0 && rowDiff + colDiff !== 0;
   }
 }

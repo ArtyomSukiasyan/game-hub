@@ -1,5 +1,7 @@
-import whiteBishop from "../../images/whiteBishop.png";
-import blackBishop from "../../images/blackBishop.png";
+import { white } from "../../constants/players";
+import { whiteBishop, blackBishop } from "../../constants/asciis";
+import whiteBishopImage from "../../images/whiteBishop.png";
+import blackBishopImage from "../../images/blackBishop.png";
 import styles from "../../Game.module.css";
 
 export default class Bishop {
@@ -7,13 +9,22 @@ export default class Bishop {
     this.player = player;
     this.highlight = 0;
     this.possible = 0;
+
     this.icon =
-      player === "w" ? (
-        <img src={whiteBishop} className={styles.piece} alt="WB"></img>
+      player === white ? (
+        <img
+          src={whiteBishopImage}
+          className={styles.piece}
+          alt="whiteBishop"
+        ></img>
       ) : (
-        <img src={blackBishop} className={styles.piece} alt="BB"></img>
+        <img
+          src={blackBishopImage}
+          className={styles.piece}
+          alt="blackBishop"
+        ></img>
       );
-    this.ascii = player === "w" ? "b" : "B";
+    this.ascii = player === white ? whiteBishop : blackBishop;
   }
 
   canMove(start, end) {
@@ -25,11 +36,6 @@ export default class Bishop {
     const rowDiff = endRow - startRow;
     const colDiff = endCol - startCol;
 
-    if (rowDiff === colDiff) {
-      return true;
-    } else if (rowDiff === -colDiff) {
-      return true;
-    }
-    return false;
+    return rowDiff === colDiff || rowDiff === -colDiff;
   }
 }
