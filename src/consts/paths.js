@@ -1,7 +1,7 @@
 const paths = {
   home: "/home/:id",
   games: "/games/:id",
-  about: "/about",
+  about: "/team",
   register: "/register",
   activeGame: "/game/:type",
 };

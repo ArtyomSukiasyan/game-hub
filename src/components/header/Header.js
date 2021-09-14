@@ -34,7 +34,7 @@ export default function Header({ id, verify }) {
         </b>
         <b>
           <NavLink to={paths.about} activeClassName={styles.selected}>
-            About
+            Team
           </NavLink>
         </b>
       </nav>

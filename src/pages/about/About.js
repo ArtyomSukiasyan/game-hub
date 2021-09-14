@@ -4,7 +4,8 @@ import styles from "./About.module.css";
 import img1 from "../../img/team/img1.jpg";
 import img2 from "../../img/team/img2.jpg";
 import img3 from "../../img/team/img3.jfif";
-import img4 from "../../img/hangman.png";
+import img4 from "../../img/team/img4.jpg";
+
 
 export default function About() {
   const info = [
