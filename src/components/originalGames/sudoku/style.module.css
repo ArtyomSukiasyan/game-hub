@@ -1,6 +1,6 @@
 .table_sudoku {
-  width: 486px;
-  height: 486px;
+  width: 468px;
+  height: 468px;
   background-color: rgb(255, 255, 255);
 }
 .sudoku {
@@ -23,7 +23,7 @@
   margin: 0;
 }
 .number {
-  width: 32px;
+  width: 52px;
   height: 52px;
   font-size: 150%;
   line-height: 1.65;
@@ -53,14 +53,14 @@
   width: 100%;
   background-color: black;
   position: relative;
-  bottom: 325px;
+  bottom: 313px;
 }
 .border2 {
   height: 3px;
   width: 100%;
   background-color: black;
   position: relative;
-  bottom: 166px;
+  bottom: 161px;
 }
 
 .border3 {
@@ -68,16 +68,16 @@
   width: 3px;
   background-color: black;
   position: relative;
-  left: 161px;
-  bottom: 492px;
+  left: 155px;
+  bottom: 474px;
 }
 .border4 {
   height: 100%;
   width: 3px;
   background-color: black;
   position: relative;
-  left: 323px;
-  bottom: 978px;
+  left: 310px;
+  bottom: 941px;
 }
 .bigNumberBlok {
   display: flex;
@@ -111,9 +111,7 @@
   justify-content: center;
 }
 
-.button {
-  min-width: 300px;
-  min-height: 60px;
+.sButton {
   font-family: "Nunito", sans-serif;
   font-size: 22px;
   text-transform: uppercase;
@@ -136,7 +134,7 @@
   padding: 10px;
 }
 
-button::before {
+.sButton::before {
   content: "";
   border-radius: 1000px;
   min-width: calc(300px + 12px);
@@ -151,7 +149,7 @@ button::before {
   transition: all 0.3s ease-in-out 0s;
 }
 
-button::after {
+.sButton::after {
   content: "";
   width: 30px;
   height: 30px;
@@ -164,7 +162,7 @@ button::after {
   animation: ring 1.5s infinite;
 }
 
-@keyframes ring {
+/* @keyframes ring {
   0% {
     width: 30px;
     height: 30px;
@@ -175,4 +173,4 @@ button::after {
     height: 300px;
     opacity: 0;
   }
-}
+} */

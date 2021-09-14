@@ -23,9 +23,9 @@ const RangeSlider = ({ start }) => {
           max="60"
         />
         <div className={styles.wrap}>
-          <button onClick={() => start(index)} className={styles.button}>
+          <div onClick={() => start(index)} className={styles.sButton}>
             Starat
-          </button>
+          </div>
         </div>
       </>
     </>
