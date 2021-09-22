@@ -1,28 +1,19 @@
 import { white } from "../../constants/players";
 import { whiteRook, blackRook } from "../../constants/asciis";
-import whiteRookImage from "../../images/whiteRook.png";
-import blackRookImage from "../../images/blackRook.png";
 import styles from "../../Game.module.css";
 
 export default class Rook {
   constructor(player) {
     this.player = player;
-    this.highlight = 0;
-    this.possible = 0;
-    this.icon =
-      player === white ? (
-        <img
-          src={whiteRookImage}
-          className={styles.piece}
-          alt="whiteRook"
-        ></img>
-      ) : (
-        <img
-          src={blackRookImage}
-          className={styles.piece}
-          alt="blackRook"
-        ></img>
-      );
+    this.highlight = false;
+    this.possible = false;
+    this.icon = (
+      <span className={styles.piece}>
+        {player === white
+          ? String.fromCharCode(9814)
+          : String.fromCharCode(9820)}
+      </span>
+    );
     this.ascii = player === white ? whiteRook : blackRook;
   }
 

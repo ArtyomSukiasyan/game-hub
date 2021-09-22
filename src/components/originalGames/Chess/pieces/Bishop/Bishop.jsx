@@ -1,29 +1,19 @@
 import { white } from "../../constants/players";
 import { whiteBishop, blackBishop } from "../../constants/asciis";
-import whiteBishopImage from "../../images/whiteBishop.png";
-import blackBishopImage from "../../images/blackBishop.png";
 import styles from "../../Game.module.css";
 
 export default class Bishop {
   constructor(player) {
     this.player = player;
-    this.highlight = 0;
-    this.possible = 0;
-
-    this.icon =
-      player === white ? (
-        <img
-          src={whiteBishopImage}
-          className={styles.piece}
-          alt="whiteBishop"
-        ></img>
-      ) : (
-        <img
-          src={blackBishopImage}
-          className={styles.piece}
-          alt="blackBishop"
-        ></img>
-      );
+    this.highlight = false;
+    this.possible = false;
+    this.icon = (
+      <span className={styles.piece}>
+        {player === white
+          ? String.fromCharCode(9815)
+          : String.fromCharCode(9821)}
+      </span>
+    );
     this.ascii = player === white ? whiteBishop : blackBishop;
   }
 
