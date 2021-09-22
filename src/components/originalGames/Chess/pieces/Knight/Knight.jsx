@@ -1,20 +1,19 @@
 import { white } from "../../constants/players";
 import { whiteKnight, blackKnight } from "../../constants/asciis";
-import whiteKnightImage from "../../images/whiteKnight.png";
-import blackKnightImage from "../../images/blackKnight.png";
 import styles from "../../Game.module.css";
 
 export default class Knight {
   constructor(player) {
     this.player = player;
-    this.highlight = 0;
-    this.possible = 0;
-    this.icon =
-      player === white ? (
-        <img src={whiteKnightImage} className={styles.piece} alt="whiteKnight"></img>
-      ) : (
-        <img src={blackKnightImage} className={styles.piece} alt="blackKnight"></img>
-      );
+    this.highlight = false;
+    this.possible = false;
+    this.icon = (
+      <span className={styles.piece}>
+        {player === white
+          ? String.fromCharCode(9816)
+          : String.fromCharCode(9822)}
+      </span>
+    );
     this.ascii = player === white ? whiteKnight : blackKnight;
   }
 
@@ -27,23 +26,24 @@ export default class Knight {
     const rowDiff = endRow - startRow;
     const colDiff = endCol - startCol;
 
-    if (rowDiff === 1 && colDiff === -2) {
-      return true;
-    } else if (rowDiff === 2 && colDiff === -1) {
-      return true;
-    } else if (rowDiff === 2 && colDiff === 1) {
-      return true;
-    } else if (rowDiff === 1 && colDiff === 2) {
-      return true;
-    } else if (rowDiff === -1 && colDiff === 2) {
-      return true;
-    } else if (rowDiff === -2 && colDiff === 1) {
-      return true;
-    } else if (rowDiff === -2 && colDiff === -1) {
-      return true;
-    } else if (rowDiff === -1 && colDiff === -2) {
-      return true;
-    }
-    return false;
+    const leftTop = rowDiff === 1 && colDiff === -2;
+    const topLeft = rowDiff === 2 && colDiff === -1;
+    const topRight = rowDiff === 2 && colDiff === 1;
+    const rightTop = rowDiff === 1 && colDiff === 2;
+    const rightDown = rowDiff === -1 && colDiff === 2;
+    const downRight = rowDiff === -2 && colDiff === 1;
+    const downLeft = rowDiff === -2 && colDiff === -1;
+    const leftDown = rowDiff === -1 && colDiff === -2;
+
+    return (
+      leftTop ||
+      topLeft ||
+      topRight ||
+      rightTop ||
+      rightDown ||
+      downRight ||
+      downLeft ||
+      leftDown
+    );
   }
 }

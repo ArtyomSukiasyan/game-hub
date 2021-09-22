@@ -1,20 +1,19 @@
 import { white } from "../../constants/players";
 import { whiteQueen, blackQueen } from "../../constants/asciis";
-import whiteQueenImage from "../../images/whiteQueen.png";
-import blackQueenImage from "../../images/blackQueen.png";
 import styles from "../../Game.module.css";
 
 export default class Queen {
   constructor(player) {
     this.player = player;
-    this.highlight = 0;
-    this.possible = 0;
-    this.icon =
-      player === white ? (
-        <img src={whiteQueenImage} className={styles.piece} alt="whiteQueen"></img>
-      ) : (
-        <img src={blackQueenImage} className={styles.piece} alt="blackQueen"></img>
-      );
+    this.highlight = false;
+    this.possible = false;
+    this.icon = (
+      <span className={styles.piece}>
+        {player === white
+          ? String.fromCharCode(9813)
+          : String.fromCharCode(9819)}
+      </span>
+    );
     this.ascii = player === white ? whiteQueen : blackQueen;
   }
 
@@ -27,19 +26,9 @@ export default class Queen {
     const rowDiff = endRow - startRow;
     const colDiff = endCol - startCol;
 
-    if (rowDiff > 0 && colDiff === 0) {
-      return true;
-    } else if (rowDiff === 0 && colDiff > 0) {
-      return true;
-    } else if (rowDiff < 0 && colDiff === 0) {
-      return true;
-    } else if (rowDiff === 0 && colDiff < 0) {
-      return true;
-    } else if (rowDiff === colDiff) {
-      return true;
-    } else if (rowDiff === -colDiff) {
-      return true;
-    }
-    return false;
+    const haveDiagonalMove = rowDiff === colDiff || rowDiff === -colDiff;
+    const haveVerticalMove = rowDiff * colDiff === 0 && rowDiff + colDiff !== 0;
+
+    return haveDiagonalMove || haveVerticalMove;
   }
 }

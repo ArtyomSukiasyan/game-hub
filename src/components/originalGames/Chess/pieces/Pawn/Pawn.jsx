@@ -1,20 +1,19 @@
 import { white } from "../../constants/players";
 import { whitePawn, blackPawn } from "../../constants/asciis";
-import whitePawnImage from "../../images/whitePawn.png";
-import blackPawnImage from "../../images/blackPawn.png";
 import styles from "../../Game.module.css";
 
 export default class Pawn {
   constructor(player) {
     this.player = player;
-    this.highlight = 0;
-    this.possible = 0;
-    this.icon =
-      player === white ? (
-        <img src={whitePawnImage} className={styles.piece} alt="whitePawn"></img>
-      ) : (
-        <img src={blackPawnImage} className={styles.piece} alt="blackPawn"></img>
-      );
+    this.highlight = false;
+    this.possible = false;
+    this.icon = (
+      <span className={styles.piece}>
+        {player === white
+          ? String.fromCharCode(9817)
+          : String.fromCharCode(9823)}
+      </span>
+    );
     this.ascii = player === white ? whitePawn : blackPawn;
   }
 
@@ -29,15 +28,15 @@ export default class Pawn {
 
     if (this.player === white) {
       if (colDiff === 0) {
-        if (rowDiff === 1 || rowDiff === 2) return true;
+        return rowDiff === 1 || rowDiff === 2;
       } else if (colDiff === -1 || colDiff === 1) {
-        if (rowDiff === 1) return true;
+        return rowDiff === 1;
       }
     } else {
       if (colDiff === 0) {
-        if (rowDiff === -2 || rowDiff === -1) return true;
+        return rowDiff === -2 || rowDiff === -1;
       } else if (colDiff === -1 || colDiff === 1) {
-        if (rowDiff === -1) return true;
+        return rowDiff === -1;
       }
     }
     return false;
