@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useHttp } from "../../../hooks/useHttp";
 import Language from "../../language/Language";
 import MiniLoading from "../../loading/loading";
 import CreateBlok from "./gameBlok";
@@ -16,12 +15,9 @@ const Sudoku = () => {
   const [isStart, setIsStart] = useState(false);
   const [load, setLoad] = useState(false);
 
-  const { request } = useHttp();
 
   const setData = async (index) => {
     try {
-      const data = await request(url);
-      setMtr(deleteNumbers(data, index));
       setLoad(true);
     } catch (e) {}
   };

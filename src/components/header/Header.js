@@ -42,7 +42,6 @@ export default function Header({ id, verify }) {
         <Language />
         <IconButton>
           <PersonIcon className={styles.icon} />
-          <NavLink to={paths.register}>Log out</NavLink>
         </IconButton>
       </div>
     </header>

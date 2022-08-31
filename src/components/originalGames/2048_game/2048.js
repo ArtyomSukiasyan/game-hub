@@ -1,12 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
-import { useHttp } from "../../../hooks/useHttp";
 
 import check from "./check";
 import pour from "./pour";
 import startEvent from "./startEvent";
 import isSimilar from "./isSimilar";
 import styles from "./style.module.css";
-import { saveData } from "./saveData";
 
 const start = "start";
 const gameSize = 4;
@@ -16,7 +14,6 @@ const Game2048 = () => {
   const [table, setTable] = useState(null);
   const [points, setPoints] = useState(0);
 
-  const { request } = useHttp();
 
   const move = useCallback((newМatrix) => {
     if (gametablevalue.length !== 0) {
@@ -41,7 +38,7 @@ const Game2048 = () => {
   }, [gametablevalue]);
 
   const save = () => {
-    saveData(request, points);
+   
   };
 
   useEffect(() => {

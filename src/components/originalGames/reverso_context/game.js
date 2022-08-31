@@ -6,8 +6,6 @@ import Cards from "./getDataCards";
 import Form from "./stepOne";
 import { isCardsSuitable } from "./gameFunc";
 import Loading from "../../loading/loading";
-import { losses, victories } from "../../../helpers/results_of_the_game";
-import { useHttp } from "../../../hooks/useHttp";
 
 const socket = io("http://shavarshgame.herokuapp.com");
 
@@ -27,7 +25,6 @@ function ReverContext() {
   const [cartLength, setCartLength] = useState(6);
   const [takeRandom, setTakeRandom] = useState(false);
 
-  const { request } = useHttp();
 
   const changeImput = (e) => {
     setRoom(e.target.value);
@@ -59,7 +56,6 @@ function ReverContext() {
         setRandomCard(false);
       }
       if (getData.data.losses) {
-        losses(request);
         alert("losses");
       }
     });
@@ -76,7 +72,6 @@ function ReverContext() {
       setCartData(data2.myCard.filter((item) => item));
 
       if (newArr.length === 0) {
-        victories(request);
 
         socket.emit("SAY:SOMETHING", {
           roome,

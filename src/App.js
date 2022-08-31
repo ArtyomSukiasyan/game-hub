@@ -1,38 +1,21 @@
-import { useEffect, useState } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import Loading from "./components/loading/loading";
-import { validToken } from "./helpers/isValidToken";
-import { useRoutes } from "./helpers/routes";
-import { useHttp } from "./hooks/useHttp";
+import { Route, Switch } from "react-router-dom";
+import Header from "./components/header/Header";
+import paths from "./consts/paths";
+import About from "./pages/about/About";
+import AllGames from "./pages/allGames/AllGames";
+import GamePage from "./pages/gamePage/GamePage";
+import Home from "./pages/home/Home";
 
 const App = () => {
-  const { request } = useHttp();
-
-  const [userId, setUserId] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  const verify = async () => {
-    const userData = await validToken(request);
-    setUserId(userData.owner);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    verify();
-  }, []);
-
-  const router = useRoutes(userId, verify);
   return (
     <>
-      {loading ? (
-        <div style={{ marginTop: "20%", marginLeft: "24%" }}>
-          <Loading />
-        </div>
-      ) : (
-        <Router>
-          <div className="App">{router}</div>
-        </Router>
-      )}
+      <Header />
+      <Switch>
+        <Route exact path={paths.home} component={Home} />
+        <Route path={paths.games} component={AllGames} />
+        <Route path={paths.about} component={About} />
+        <Route path={paths.activeGame} component={GamePage} />
+      </Switch>
     </>
   );
 };
